@@ -10,7 +10,7 @@ export const ButtonNew = ({ url, icon, value }) => {
 
             <Link
                 href={route(url)}
-                className="flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md shadow-md transition-colors duration-300 transform"
+                className="flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md shadow-md"
             >
                 <IconContext.Provider value={{ className: "text-xl text-gray-50 text-white" }}>
                     {icon}
@@ -28,7 +28,7 @@ export const ButtonEdit = ({ url }) => {
 
             <Link
                 href={route(url)}
-                className="flex items-center py-2 px-4 bg-orange-500 hover:bg-orange-600 rounded-md shadow-md transition-colors duration-300 transform"
+                className="flex items-center py-2 px-4 bg-orange-500 hover:bg-orange-600 rounded-md shadow-md"
             >
                 <IconContext.Provider value={{ className: "text-xl text-gray-50 text-white" }}>
                     <IoCreateOutline />
@@ -46,7 +46,7 @@ export const ButtonDelete = ({ url }) => {
 
             <Link
                 href={route(url)}
-                className="flex items-center py-2 px-4 bg-red-500 hover:bg-red-600 rounded-md shadow-md transition-colors duration-300 transform"
+                className="flex items-center py-2 px-4 bg-red-500 hover:bg-red-600 rounded-md shadow-md"
             >
                 <IconContext.Provider value={{ className: "text-xl text-gray-50 text-white" }}>
                     <IoTrashOutline />

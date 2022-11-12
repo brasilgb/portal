@@ -6,7 +6,7 @@ import { IoHome } from 'react-icons/io5';
 export const BoxMain = ({ children }) => {
     return (
         <Fragment>
-            <div className="px-8 animate__animated animate__fadeIn">
+            <div className="px-8">
                 {children}
             </div>
         </Fragment>
