@@ -10,6 +10,7 @@ import APagination from '@/Components/Pagination';
 const Categories = ({ categories }) => {
 
     return (
+        
         <AdminLayout title="Categorias">
             <BoxMain>
                 <BoxSup

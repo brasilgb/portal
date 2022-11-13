@@ -24,6 +24,8 @@ Route::get('/', function () {
 Route::get('/admin', [HomeController::class, 'index'])->name('admin');
 Route::get('/admin/categories',[CategoryController::class, 'index'])->name('categories');
 Route::get('/admin/categories/adcategory',[CategoryController::class, 'create'])->name('categories.adcategory');
+Route::post('/admin/categories',[CategoryController::class, 'store'])->name('categories.store');
+
 Route::get('/admin/categories/edcategory',[CategoryController::class, 'create'])->name('categories.adcategory');
 
 

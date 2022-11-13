@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->text('title')->nullable();
             $table->text('description')->nullable();
             $table->integer('active');
-            $table->integer('parent')->nullable();
-            $table->timestamps();
+            $table->integer('parent');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

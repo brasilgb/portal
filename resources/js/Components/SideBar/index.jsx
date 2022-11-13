@@ -12,7 +12,7 @@ const SideBar = () => {
 
         <Fragment>
             <div className="absolute md:hidden z-20 pt-2 px-2">
-                <label htmlFor="menu-toggle" className="cursor-pointer block">
+                <label htmlFor="menu-toggle" className="cursor-pointer block dark:text-gray-200">
                     <IoMdMenu size={25} onClick={() => setShowSide(!showSide)} />
                 </label>
             </div>
@@ -21,7 +21,7 @@ const SideBar = () => {
                 {/* <h2 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mt-6 md:mt-0">Brand</h2> */}
 
                 <div className="flex flex-col items-center mt-2 -mx-2">
-                    <img className=" w-36 h-20 mx-2 rounded-full bg-blue-500" src="http://gerencial.gruposolar.com.br/images/logo-grupo.png" alt="avatar" />
+                    <img className=" w-36 h-20 mx-2 rounded-full bg-blue-500" src="https://bi3.gruposolar.com.br/images/logo-grupo.png" alt="avatar" />
                     <h4 className="mx-2 mt-2 font-medium text-gray-800 dark:text-gray-200 hover:underline">Grupo Solar</h4>
                 </div>
 

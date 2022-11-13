@@ -26,7 +26,8 @@ return new class extends Migration
             $table->integer('active');
             $table->integer('type');
             $table->integer('linked')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+$table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

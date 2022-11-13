@@ -8,7 +8,7 @@ const NavBar = () => {
     const [showDropDownUser, setShowDropDownUser] = useState(false);
     return (
         <Fragment>
-            <nav id="header" className="z-2 top-10 py-1 bg-white shadow md:ml-64">
+            <nav id="header" className="z-2 top-10 py-1 bg-white shadow md:ml-64 border-b dark:bg-gray-900 dark:border-gray-700">
                 <div className="w-full flex items-center justify-between mt-0 px-2 py-0">
                     <div></div>
                     <div className="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1">
@@ -20,11 +20,11 @@ const NavBar = () => {
                                 <button
                                     onClick={() => setShowDropDownNotifi(!showDropDownNotifi)}
                                 >
-                                    <IconContext.Provider value={{ size: "1.9rem", className: "text-gray-600" }}>
+                                    <IconContext.Provider value={{ size: "1.9rem", className: "text-gray-600 dark:text-gray-200" }}>
                                         <IoNotificationsCircleSharp />
                                     </IconContext.Provider>
                                 </button>
-                                <div className={`${showDropDownNotifi ? 'block' : 'hidden'} absolute right-0 z-2 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl`}>
+                                <div className={`${showDropDownNotifi ? 'block' : 'hidden'} absolute right-1 z-2 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-900`}>
 
                                     <a href="#" className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <img className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar" />
@@ -45,11 +45,11 @@ const NavBar = () => {
                                 <button
                                     onClick={() => setShowDropDownUser(!showDropDownUser)}
                                 >
-                                    <IconContext.Provider value={{ size: "1.9rem", className: "text-gray-600" }}>
+                                    <IconContext.Provider value={{ size: "1.9rem", className: "text-gray-600 dark:text-gray-200" }}>
                                         <IoPersonCircleSharp />
                                     </IconContext.Provider>
                                 </button>
-                                <div className={`${showDropDownUser ? 'block' : 'hidden'} absolute right-0 z-2 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl`}>
+                                <div className={`${showDropDownUser ? 'block' : 'hidden'} absolute right-1 z-2 w-56 py-2 mt-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-900`}>
 
                                     <a href="#" className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <img className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar" />

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -36,7 +39,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Categories/adCategory');
+        $categories = Category::get();
+        return Inertia::render('Admin/Categories/adCategory', ['categories' => $categories]);
     }
 
     /**
@@ -47,7 +51,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!'
+        ];
+        $request->validate([
+            'name' => ['required'],
+            'description' => ['required']
+        ],$messages,
+        [
+            'name' => 'categoria',
+            'description' => 'descrição'
+        ]);
+
+        $data['parent'] = $request->parentcategory == null ? 0 : $request->parentcategory;
+        $data['slug'] = Str::slug($request->categoryname);
+        Category::create($data);
+        // Session::flash('success', 'Categoria criada com sucesso!');
+        return Redirect::route('categories');
     }
 
     /**
