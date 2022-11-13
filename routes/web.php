@@ -26,7 +26,7 @@ Route::get('/admin/categories',[CategoryController::class, 'index'])->name('cate
 Route::get('/admin/categories/adcategory',[CategoryController::class, 'create'])->name('categories.adcategory');
 Route::post('/admin/categories',[CategoryController::class, 'store'])->name('categories.store');
 
-Route::get('/admin/categories/edcategory',[CategoryController::class, 'create'])->name('categories.adcategory');
+Route::get('/admin/categories/edcategory',[CategoryController::class, 'create'])->name('categories.edcategory');
 
 
 
