@@ -10,7 +10,7 @@ import APagination from '@/Components/Pagination';
 const Categories = ({ categories }) => {
 
     return (
-        
+
         <AdminLayout title="Categorias">
             <BoxMain>
                 <BoxSup
@@ -24,8 +24,8 @@ const Categories = ({ categories }) => {
                 />
                 <BoxContainer>
                     <BoxHeader>
-                        <ButtonNew url="categories.adcategory" icon={<IoAdd />} value="Adicionar" />
-                        <FormSearch url="categorias" placeholder="Buscar por categoria" />
+                        <ButtonNew url="categories.create" icon={<IoAdd />} value="Adicionar" />
+                        <FormSearch url="categories.index" placeholder="Buscar por categoria" />
                     </BoxHeader>
                     <BoxContent>
                         <div className="inline-block min-w-full rounded-md overflow-hidden">
@@ -48,10 +48,10 @@ const Categories = ({ categories }) => {
                                         <ATd>
                                             <div className="flex items-center justify-end">
                                                 <div className="mr-1">
-                                                    <ButtonEdit url="categories" />
+                                                    <ButtonEdit url={route('categories.edit', category.id)} />
                                                 </div>
                                                 <div className="ml-1">
-                                                    <ButtonDelete url="categories" />
+                                                    <ButtonDelete url="categories.destroy" category={category.id} />
                                                 </div>
                                             </div>
                                         </ATd>

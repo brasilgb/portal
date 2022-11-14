@@ -21,15 +21,9 @@ use App\Http\Controllers\Admin\HomeController;
 Route::get('/', function () {
     return Inertia::render('Site/Home/index');
 });
+
 Route::get('/admin', [HomeController::class, 'index'])->name('admin');
-Route::get('/admin/categories',[CategoryController::class, 'index'])->name('categories');
-Route::get('/admin/categories/adcategory',[CategoryController::class, 'create'])->name('categories.adcategory');
-Route::post('/admin/categories',[CategoryController::class, 'store'])->name('categories.store');
-
-Route::get('/admin/categories/edcategory',[CategoryController::class, 'create'])->name('categories.edcategory');
-
-
-
+Route::resource('/admin/categories', CategoryController::class);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -3,14 +3,14 @@ import { IconContext } from 'react-icons';
 import { IoSearch } from 'react-icons/io5';
 import { useForm } from '@inertiajs/inertia-react'
 
-export const FormSearch = ({ placeholder }) => {
+export const FormSearch = ({ placeholder, url }) => {
     const { data, setData, post, get, processing, errors } = useForm({
         q: '',
     });
 
     function handleSubmit(e) {
         e.preventDefault();
-        get(route('categories'));
+        get(route(url));
     }
 
     return (

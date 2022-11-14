@@ -64,11 +64,11 @@ class CategoryController extends Controller
             'description' => 'descrição'
         ]);
 
-        $data['parent'] = $request->parentcategory == null ? 0 : $request->parentcategory;
-        $data['slug'] = Str::slug($request->categoryname);
+        $data['parent'] = $request->parent;
+        $data['slug'] = Str::slug($request->name);
         Category::create($data);
         // Session::flash('success', 'Categoria criada com sucesso!');
-        return Redirect::route('categories');
+        return Redirect::route('categories.index');
     }
 
     /**
@@ -79,8 +79,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $parentcategory = Category::orderByDesc('categoryname')->where('parent',0)->get();
-        return Inertia::render('admin/categories/Edit', ['category' => $category,'parentcategory' => $parentcategory, 'categoryTitle' => 'Editar categorias']);
+        $parent = Category::orderByDesc('name')->get();
+        return Inertia::render('Admin/Categories/edCategory', ['category' => $category,'parent' => $parent]);
     }
 
     /**
@@ -91,7 +91,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return redirect()->route('categoria.show', ['category' => $category->id_category]);
+        return redirect()->route('categories.show', ['category' => $category->id]);
     }
 
     /**
@@ -103,7 +103,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $data = $request->all();
+
+        $messages = [
+            'required' => 'O campo :attribute deve ser preenchido!'
+        ];
+        $request->validate([
+            'name' => ['required']
+        ],$messages,
+        [
+            'name' => 'categoria',
+        ]);
+        $data['slug'] = Str::slug($request->name);
+        $data['parent'] = $request->parent;
+        $category->update($data);
+        Session::flash('success', 'Categoria editada com sucesso!');
+        return Redirect::route('categories.show', ['category' => $category->id]);
     }
 
     /**
@@ -114,6 +129,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete($category);
     }
+    
 }
