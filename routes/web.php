@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::get('/', function () {
 
 Route::get('/admin', [HomeController::class, 'index'])->name('admin');
 Route::resource('/admin/categories', CategoryController::class);
+Route::resource('/admin/posts', PostController::class);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

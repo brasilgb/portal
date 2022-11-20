@@ -27,6 +27,8 @@ class CategoryController extends Controller
             $query->where('name', 'like', '%'. $search .'%');
         }
 
+        // $query = DB::table('categories AS c')->join('categories AS self','c.id',"=",'self.parent');
+
         $categories = $query->paginate(15);
 
         return Inertia::render('Admin/Categories/index', ['categories' => $categories]);
@@ -67,7 +69,7 @@ class CategoryController extends Controller
         $data['parent'] = $request->parent;
         $data['slug'] = Str::slug($request->name);
         Category::create($data);
-        // Session::flash('success', 'Categoria criada com sucesso!');
+        Session::flash('success', 'Categoria criada com sucesso!');
         return Redirect::route('categories.index');
     }
 
@@ -109,10 +111,12 @@ class CategoryController extends Controller
             'required' => 'O campo :attribute deve ser preenchido!'
         ];
         $request->validate([
-            'name' => ['required']
+            'name' => ['required'],
+            'description' => ['required']
         ],$messages,
         [
             'name' => 'categoria',
+            'description' => 'descrição',
         ]);
         $data['slug'] = Str::slug($request->name);
         $data['parent'] = $request->parent;

@@ -8,7 +8,7 @@ import { FormSearch } from '@/Components/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
 import { IconContext } from 'react-icons';
 
-const edCategory = ({ category, parent }) => {
+const edPost = ({ category, parent }) => {
     const { flash } = usePage().props;
     // console.log(flash);
     const { data, setData, put, errors } = useForm({
@@ -119,4 +119,4 @@ const edCategory = ({ category, parent }) => {
     )
 }
 
-export default edCategory;
+export default edPost;

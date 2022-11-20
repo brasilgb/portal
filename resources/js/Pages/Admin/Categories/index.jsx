@@ -6,6 +6,7 @@ import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { ATable, ATd, ATh, ATr } from '@/Components/Table';
 import APagination from '@/Components/Pagination';
+import CatHierarchy from '@/Components/CatHierarchy';
 
 const Categories = ({ categories }) => {
 
@@ -37,26 +38,7 @@ const Categories = ({ categories }) => {
                                     <ATh>Parent</ATh>
                                     <ATh></ATh>
                                 </ATr>
-                                {categories.data.map((category, index) => (
-                                    <ATr key={index} header={false}>
-                                        <ATd>{category.id}</ATd>
-                                        <ATd>{category.name}</ATd>
-                                        <ATd>{category.slug}</ATd>
-                                        <ATd>
-                                            {categories.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
-                                        </ATd>
-                                        <ATd>
-                                            <div className="flex items-center justify-end">
-                                                <div className="mr-1">
-                                                    <ButtonEdit url={route('categories.edit', category.id)} />
-                                                </div>
-                                                <div className="ml-1">
-                                                    <ButtonDelete url="categories.destroy" category={category.id} />
-                                                </div>
-                                            </div>
-                                        </ATd>
-                                    </ATr>
-                                ))}
+                                <CatHierarchy data={categories} catid={null} />
                             </ATable>
                         </div>
                     </BoxContent>
