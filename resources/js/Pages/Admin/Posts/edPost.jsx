@@ -1,100 +1,119 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoGridOutline, IoArrowBackOutline } from 'react-icons/io5';
-import { HiOutlineInformationCircle } from 'react-icons/hi2';
 import { ButtonNew, ButtonSave } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
-import { IconContext } from 'react-icons';
 
-const edPost = ({ category, parent }) => {
+const EdPost = ({ post, categories }) => {
     const { flash } = usePage().props;
-    // console.log(flash);
+
     const { data, setData, put, errors } = useForm({
-        name: category.name,
-        description: category.description,
-        parent: category.parent,
-        active: category.active
+        title: post.title,
+        summary: post.summary,
+        content: post.content,
+        category_id: post.category_id,
+        featured: null,
+        social: post.social,
+        linked: post.linked,
+        active: post.active,
+        type: 1
     });
 
     function submit(e) {
         e.preventDefault();
-
-        put(route('categories.update', category.id));
+        put(route('posts.update', post.id));
     }
 
     return (
-        <AdminLayout title="Categorias">
+        <AdminLayout title="Postagens">
             <BoxMain>
                 <BoxSup
                     titleTop={[{
-                        'title': "Categorias",
+                        'title': "Postagens",
                         'icon': <IoGridOutline />
                     }]}
                     breadcumb={[
-                        { 'value': 'Categorias', 'url': 'categories.index', 'separator': '/' }
+                        { 'value': 'Postagens', 'url': 'posts.index', 'separator': '/' },
+                        { 'value': 'Alterar', 'url': '', 'separator': '' },
                     ]}
                 />
                 <BoxContainer>
                     <BoxHeader>
-                        <ButtonNew url="categories.index" icon={<IoArrowBackOutline />} value="Voltar" />
-                        <FormSearch url="categories.index" placeholder="Buscar por categoria" />
+                        <ButtonNew url="posts.index" icon={<IoArrowBackOutline />} value="Voltar" />
+                        <FormSearch url="posts.index" placeholder="Buscar por postagem" />
                     </BoxHeader>
-
                     <BoxContent>
                         {flash.message && (
-                            <div className="flex items-center bg-green-100 rounded-lg p-4 mb-4 text-sm text-green-700 border border-green-200" role="alert">
-                                <IconContext.Provider value={{ className: "text-2xl text-green-700" }}>
-                                    <HiOutlineInformationCircle />
-                                </IconContext.Provider>
-                                <div>
-                                    <span className="font-medium">{flash.message}</span>
-                                </div>
-                            </div>
+                            <FlashMessage message={flash.message} />
                         )}
                         <form onSubmit={submit}>
                             <div className="grid grid-cols-1 gap-6 mt-4">
                                 <div>
-                                    <label className="text-gray-700" htmlFor="category">Categoria</label>
+                                    <label className="text-gray-700" htmlFor="title">Título</label>
                                     <input
-                                        id="category"
+                                        id="title"
                                         type="text"
-                                        value={data.name}
-                                        onChange={(e) => setData('name', e.target.value)}
+                                        value={data.title}
+                                        onChange={(e) => setData('title', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                     />
-                                    {errors.name && <div className="text-red-500">{errors.name}</div>}
+                                    {errors.title && <div className="text-red-500">{errors.title}</div>}
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="descricao">Descrição</label>
+                                    <label className="text-gray-700" htmlFor="summary">Descrição</label>
                                     <textarea
-                                        id="description"
-                                        value={data.description}
-                                        onChange={(e) => setData('description', e.target.value)}
+                                        id="summary"
+                                        value={data.summary}
+                                        onChange={(e) => setData('summary', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                                     </textarea>
-                                    {errors.description && <div className="text-red-500">{errors.description}</div>}
+                                    {errors.summary && <div className="text-red-500">{errors.summary}</div>}
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="parent">Categoria pai</label>
+                                    <label className="text-gray-700" htmlFor="content">Conteúdo</label>
+                                    <textarea
+                                        id="content"
+                                        value={data.content}
+                                        onChange={(e) => setData('content', e.target.value)}
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                    </textarea>
+                                    {errors.content && <div className="text-red-500">{errors.content}</div>}
+                                </div>
+                                <div className="w-48 p-2 bg-gray-100 border border-gray-200 shadow-md rounded-md">
+                                    <img src={`/uploads/${post.featured}`} alt="" />
+                                </div>
+                                <div>
+                                    <label className="text-gray-700" htmlFor="summary">Imagem destacada</label>
+                                    <input
+                                        type="file"
+                                        id="featured"
+                                        value={data.featured}
+                                        onChange={(e) => setData('featured', e.target.value)}
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+
+                                </div>
+
+                                <div>
+                                    <label className="text-gray-700" htmlFor="category_id" >Categoria</label>
                                     <select
-                                        name="parent"
-                                        id="parent"
-                                        value={data.parent}
-                                        onChange={(e) => setData('parent', e.target.value)}
+                                        name="category_id"
+                                        id="category_id"
+                                        value={data.category_id}
+                                        onChange={(e) => setData('category_id', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                     >
-                                        <option value="null" >Selecione uma categoria pai</option>
-                                        {parent.map((cat, indexCat) => (
-                                            <option key={indexCat} value={cat.id} >{cat.name}</option>
+                                        <option value="0">Selecione uma categoria</option>
+                                        {categories.map((category, indexCategory) => (
+                                            <option key={indexCategory} value={category.id}>{category.name}</option>
                                         ))}
                                     </select>
                                 </div>
                             </div>
-
                             <div className="flex items-center mt-2">
                                 <input
                                     type="checkbox"
@@ -103,20 +122,43 @@ const edPost = ({ category, parent }) => {
                                     onChange={(e) => setData('active', e.target.checked)}
                                     className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                 />
-                                <label className="text-gray-700" htmlFor="active">{category.active ? 'Desativar' : 'Ativar'}</label>
+                                <label className="text-gray-700" htmlFor="active">Ativar página</label>
+                                {errors.active && <div className="text-red-500">{errors.active}</div>}
                             </div>
 
+                            <div className="flex items-center mt-2">
+                                <input
+                                    type="checkbox"
+                                    id="social"
+                                    checked={data.social}
+                                    onChange={(e) => setData('social', e.target.checked)}
+                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                />
+                                <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
+                                {errors.social && <div className="text-red-500">{errors.social}</div>}
+                            </div>
+
+                            <div className="flex items-center mt-2">
+                                <input
+                                    type="checkbox"
+                                    id="linked"
+                                    checked={data.linked}
+                                    onChange={(e) => setData('linked', e.target.checked)}
+                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                />
+                                <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
+                                {errors.linked && <div className="text-red-500">{errors.linked}</div>}
+                            </div>
                             <div className="flex justify-end mt-6">
                                 <ButtonSave />
                             </div>
                         </form>
 
                     </BoxContent>
-
                 </BoxContainer>
             </BoxMain>
         </AdminLayout>
     )
 }
 
-export default edPost;
+export default EdPost;

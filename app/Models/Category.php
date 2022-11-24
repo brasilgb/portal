@@ -20,4 +20,8 @@ class Category extends Model
         'parent'
     ];
 
+    public function postagens() {
+        return $this->hasMany(Post::class, 'category_id');
+    }
+
 }

@@ -6,9 +6,11 @@ import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { ATable, ATd, ATh, ATr } from '@/Components/Table';
 import APagination from '@/Components/Pagination';
-import CatHierarchy from '@/Components/CatHierarchy';
+import { usePage } from '@inertiajs/inertia-react';
+import FlashMessage from '@/Components/FlashMessage';
 
 const Posts = ({ posts }) => {
+    const { flash } = usePage().props;
 
     return (
 
@@ -29,6 +31,9 @@ const Posts = ({ posts }) => {
                         <FormSearch url="posts.index" placeholder="Buscar por postagem" />
                     </BoxHeader>
                     <BoxContent>
+                        {flash.message && (
+                            <FlashMessage message={flash.message} />
+                        )}
                         <div className="inline-block min-w-full rounded-md overflow-hidden">
                             <ATable>
                                 <ATr header={true}>
@@ -36,24 +41,26 @@ const Posts = ({ posts }) => {
                                     <ATh>Title</ATh>
                                     <ATh>Slug</ATh>
                                     <ATh>Resumo</ATh>
+                                    <ATh>Categoria</ATh>
                                     <ATh></ATh>
                                 </ATr>
                                 {posts.data.map((post, index) => (
                                     <Fragment key={index}>
                                         <ATr header={false}>
                                             <ATd>{post.id}</ATd>
-                                            <ATd>- - - - -{post.name}</ATd>
+                                            <ATd>{post.title}</ATd>
                                             <ATd>{post.slug}</ATd>
                                             <ATd>
-                                                {data.data.filter((c) => (c.id === posts.parent)).map((ct) => ct.name)}
+                                                {post.summary}
                                             </ATd>
+                                            <ATd>{post.categories.name}</ATd>
                                             <ATd>
                                                 <div className="flex items-center justify-end">
                                                     <div className="mr-1">
                                                         <ButtonEdit url={route('posts.edit', post.id)} />
                                                     </div>
                                                     <div className="ml-1">
-                                                        <ButtonDelete url="posts.destroy" post={post.id} />
+                                                        <ButtonDelete url="posts.destroy" param={post.id} />
                                                     </div>
                                                 </div>
                                             </ATd>

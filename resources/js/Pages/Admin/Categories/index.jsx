@@ -7,8 +7,11 @@ import { FormSearch } from '@/Components/Form';
 import { ATable, ATd, ATh, ATr } from '@/Components/Table';
 import APagination from '@/Components/Pagination';
 import CatHierarchy from '@/Components/CatHierarchy';
+import { usePage } from '@inertiajs/inertia-react';
+import FlashMessage from '@/Components/FlashMessage';
 
 const Categories = ({ categories }) => {
+    const { flash } = usePage().props;
 
     return (
 
@@ -29,6 +32,9 @@ const Categories = ({ categories }) => {
                         <FormSearch url="categories.index" placeholder="Buscar por categoria" />
                     </BoxHeader>
                     <BoxContent>
+                        {flash.message && (
+                            <FlashMessage message={flash.message} />
+                        )}
                         <div className="inline-block min-w-full rounded-md overflow-hidden">
                             <ATable>
                                 <ATr header={true}>
@@ -36,6 +42,7 @@ const Categories = ({ categories }) => {
                                     <ATh>Categoria</ATh>
                                     <ATh>Slug</ATh>
                                     <ATh>Parent</ATh>
+                                    <ATh>Postagens</ATh>
                                     <ATh></ATh>
                                 </ATr>
                                 <CatHierarchy data={categories} catid={null} />

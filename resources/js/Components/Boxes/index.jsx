@@ -46,7 +46,7 @@ export const BoxSup = ({ titleTop, breadcumb }) => {
                                 <>
                                     <Link
                                         className="text-blue-600 pr-2 dark:text-blue-400 hover:underline"
-                                        href={bc.url}
+                                        href={route(bc.url)}
                                     >
                                         {bc.value}
                                     </Link>

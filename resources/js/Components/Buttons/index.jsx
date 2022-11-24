@@ -41,7 +41,7 @@ export const ButtonSave = () => {
 
         </Fragment>
     )
-    
+
 }
 
 export const ButtonEdit = ({ url }) => {
@@ -62,14 +62,15 @@ export const ButtonEdit = ({ url }) => {
     )
 }
 
-export const ButtonDelete = ({ url, category }) => {
+export const ButtonDelete = ({ url, param }) => {
 
     const [deleteModal, setDeleteModal] = useState(false);
     const { delete: destroy } = useForm();
 
     function onsubmit(e) {
         e.preventDefault();
-        destroy(route(url, category));
+        destroy(route(url, param));
+        setDeleteModal(false);
     }
 
     return (

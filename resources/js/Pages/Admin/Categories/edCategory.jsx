@@ -2,15 +2,14 @@ import React, { Fragment } from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoGridOutline, IoArrowBackOutline } from 'react-icons/io5';
-import { HiOutlineInformationCircle } from 'react-icons/hi2';
 import { ButtonNew, ButtonSave } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
-import { IconContext } from 'react-icons';
+import FlashMessage from '@/Components/FlashMessage';
 
 const edCategory = ({ category, parent }) => {
     const { flash } = usePage().props;
-    // console.log(flash);
+    console.log(flash);
     const { data, setData, put, errors } = useForm({
         name: category.name,
         description: category.description,
@@ -44,14 +43,7 @@ const edCategory = ({ category, parent }) => {
 
                     <BoxContent>
                         {flash.message && (
-                            <div className="flex items-center bg-green-100 rounded-lg p-4 mb-4 text-sm text-green-700 border border-green-200" role="alert">
-                                <IconContext.Provider value={{ className: "text-2xl text-green-700" }}>
-                                    <HiOutlineInformationCircle />
-                                </IconContext.Provider>
-                                <div>
-                                    <span className="font-medium">{flash.message}</span>
-                                </div>
-                            </div>
+                            <FlashMessage message={flash.message} />
                         )}
                         <form onSubmit={submit}>
                             <div className="grid grid-cols-1 gap-6 mt-4">
@@ -87,7 +79,7 @@ const edCategory = ({ category, parent }) => {
                                         onChange={(e) => setData('parent', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                     >
-                                        <option value="null" >Selecione uma categoria pai</option>
+                                        <option value=" " >Selecione uma categoria pai</option>
                                         {parent.map((cat, indexCat) => (
                                             <option key={indexCat} value={cat.id} >{cat.name}</option>
                                         ))}

@@ -4,9 +4,11 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import { IoGridOutline, IoArrowBackOutline } from 'react-icons/io5';
 import { ButtonNew, ButtonSave } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
-import { useForm } from '@inertiajs/inertia-react';
+import { useForm, usePage } from '@inertiajs/inertia-react';
+import FlashMessage from '@/Components/FlashMessage';
 
 const AdCategory = ({ categories }) => {
+    const { flash } = usePage().props;
 
     const { data, setData, post, errors } = useForm({
         name: '',
@@ -39,7 +41,9 @@ const AdCategory = ({ categories }) => {
                         <FormSearch url="categories.index" placeholder="Buscar por categoria" />
                     </BoxHeader>
                     <BoxContent>
-
+                        {flash.message && (
+                            <FlashMessage message={flash.message} />
+                        )}
                         <form onSubmit={submit}>
                             <div className="grid grid-cols-1 gap-6 mt-4">
                                 <div>
@@ -73,7 +77,7 @@ const AdCategory = ({ categories }) => {
                                         onChange={(e) => setData('parent', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                     >
-                                        <option value="0">Selecione uma categoria pai</option>
+                                        <option value=" ">Selecione uma categoria pai</option>
                                         {categories.map((category, indexCategory) => (
                                             <option key={indexCategory} value={category.id}>{category.name}</option>
                                         ))}

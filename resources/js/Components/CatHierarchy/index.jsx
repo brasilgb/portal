@@ -16,13 +16,14 @@ const CatHierarchy = ({ data, catid }) => {
                             <ATd>
                                 {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                             </ATd>
+                            <ATd>{category.postagens.length}</ATd>
                             <ATd>
                                 <div className="flex items-center justify-end">
                                     <div className="mr-1">
                                         <ButtonEdit url={route('categories.edit', category.id)} />
                                     </div>
                                     <div className="ml-1">
-                                        <ButtonDelete url="categories.destroy" category={category.id} />
+                                        <ButtonDelete url="categories.destroy" param={category.id} />
                                     </div>
                                 </div>
                             </ATd>
@@ -38,13 +39,14 @@ const CatHierarchy = ({ data, catid }) => {
                                         <ATd>
                                             {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                         </ATd>
+                                        <ATd>{category.postagens.length}</ATd>
                                         <ATd>
                                             <div className="flex items-center justify-end">
                                                 <div className="mr-1">
                                                     <ButtonEdit url={route('categories.edit', category.id)} />
                                                 </div>
                                                 <div className="ml-1">
-                                                    <ButtonDelete url="categories.destroy" category={category.id} />
+                                                    <ButtonDelete url="categories.destroy" param={category.id} />
                                                 </div>
                                             </div>
                                         </ATd>
@@ -60,13 +62,14 @@ const CatHierarchy = ({ data, catid }) => {
                                                     <ATd>
                                                         {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                     </ATd>
+                                                    <ATd>{category.postagens.length}</ATd>
                                                     <ATd>
                                                         <div className="flex items-center justify-end">
                                                             <div className="mr-1">
                                                                 <ButtonEdit url={route('categories.edit', category.id)} />
                                                             </div>
                                                             <div className="ml-1">
-                                                                <ButtonDelete url="categories.destroy" category={category.id} />
+                                                                <ButtonDelete url="categories.destroy" param={category.id} />
                                                             </div>
                                                         </div>
                                                     </ATd>
@@ -82,13 +85,14 @@ const CatHierarchy = ({ data, catid }) => {
                                                                 <ATd>
                                                                     {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                                 </ATd>
+                                                                <ATd>{category.postagens.length}</ATd>
                                                                 <ATd>
                                                                     <div className="flex items-center justify-end">
                                                                         <div className="mr-1">
                                                                             <ButtonEdit url={route('categories.edit', category.id)} />
                                                                         </div>
                                                                         <div className="ml-1">
-                                                                            <ButtonDelete url="categories.destroy" category={category.id} />
+                                                                            <ButtonDelete url="categories.destroy" param={category.id} />
                                                                         </div>
                                                                     </div>
                                                                 </ATd>
@@ -104,13 +108,14 @@ const CatHierarchy = ({ data, catid }) => {
                                                                             <ATd>
                                                                                 {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                                             </ATd>
+                                                                            <ATd>{category.postagens.length}</ATd>
                                                                             <ATd>
                                                                                 <div className="flex items-center justify-end">
                                                                                     <div className="mr-1">
                                                                                         <ButtonEdit url={route('categories.edit', category.id)} />
                                                                                     </div>
                                                                                     <div className="ml-1">
-                                                                                        <ButtonDelete url="categories.destroy" category={category.id} />
+                                                                                        <ButtonDelete url="categories.destroy" param={category.id} />
                                                                                     </div>
                                                                                 </div>
                                                                             </ATd>

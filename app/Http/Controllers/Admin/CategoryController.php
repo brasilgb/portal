@@ -21,13 +21,11 @@ class CategoryController extends Controller
     {
         $search = $request->get('q');
 
-        $query = Category::orderBy('id', 'desc');
+        $query = Category::with('postagens')->orderBy('id', 'desc');
 
         if($search) {
             $query->where('name', 'like', '%'. $search .'%');
         }
-
-        // $query = DB::table('categories AS c')->join('categories AS self','c.id',"=",'self.parent');
 
         $categories = $query->paginate(15);
 
@@ -122,7 +120,7 @@ class CategoryController extends Controller
         $data['parent'] = $request->parent;
         $category->update($data);
         Session::flash('success', 'Categoria editada com sucesso!');
-        return Redirect::route('categories.show', ['category' => $category->id]);
+        return redirect()->route('categories.show', ['category' => $category->id]);
     }
 
     /**
@@ -134,6 +132,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete($category);
+        Session::flash('success', 'Categoria deletada com sucesso!');
+        return redirect()->route('categories.index');
     }
     
 }
