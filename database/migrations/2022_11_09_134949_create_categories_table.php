@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description')->nullable();
             $table->integer('active');
-            $table->integer('parent');
+            $table->integer('parent')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

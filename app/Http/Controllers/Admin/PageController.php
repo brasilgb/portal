@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -11,9 +10,9 @@ use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 
-class PostController extends Controller
+class PageController extends Controller
 {
-    /**
+/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,15 +21,16 @@ class PostController extends Controller
     {
         $search = $request->get('q');
 
-        $query = Post::with('categories')->where('type', 1)->orderBy('id', 'desc');
+        $query = Post::where('type', 0)->orderBy('id', 'desc');
 
         if($search) {
             $query->where('title', 'like', '%'. $search .'%');
         }
 
-        $posts = $query->paginate(10);
+        $pages = $query->paginate(10);
 
-        return Inertia::render('Admin/Posts/index', ['posts' => $posts]);
+        return Inertia::render('Admin/Pages/index', ['pages' => $pages]);
+
     }
 
     /**
@@ -40,8 +40,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::get();
-        return Inertia::render('Admin/Posts/adPost', ['categories' => $categories]);
+        return Inertia::render('Admin/Pages/adPage');
     }
 
     /**
@@ -60,14 +59,12 @@ class PostController extends Controller
             'title' => ['required'],
             'summary' => ['required'],
             'content' => ['required'],
-            'category_id' => ['required'],
             'featured' => ['required']
         ],$messages,
         [
             'title' => 'título',
             'summary' => 'resumo',
             'content' => 'conteúdo',
-            'category_id' => 'categoria',
             'featured' => 'imagem destacada'
         ]);
 
@@ -77,41 +74,40 @@ class PostController extends Controller
         $data['slug'] = Str::slug($request->title);
         $data['featured'] = $fileName;
         Post::create($data);
-        Session::flash('success', 'Postagem criada com sucesso!');
-        return redirect()->route('posts.index');
+        Session::flash('success', 'Página criada com sucesso!');
+        return redirect()->route('pages.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Post  $page
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $page)
     {
-        $categories = Category::get();
-        return Inertia::render('Admin/Posts/edPost', [ 'categories' => $categories, 'post' => $post ]);
+        return Inertia::render('Admin/Pages/edPage', [ 'page' => $page ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Post  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $page)
     {
-        return Redirect::route('posts.show', ['post' => $post->id ]);
+        return Redirect::route('pages.show', ['page' => $page->id ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Post  $page
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $page)
     {
         $data = $request->all();
         // dd($data);
@@ -122,44 +118,42 @@ class PostController extends Controller
             'title' => ['required'],
             'summary' => ['required'],
             'content' => ['required'],
-            'category_id' => ['required']
         ],$messages,
         [
             'title' => 'título',
             'summary' => 'resumo',
             'content' => 'conteúdo',
-            'category_id' => 'categoria'
         ]);
 
         if ($request->hasfile('featured')) {
             $fileName = time().'.'.$request->featured->extension();  
             $request->featured->move(public_path('uploads'), $fileName);
-            if( public_path('uploads').DIRECTORY_SEPARATOR.$post->featured){
-                unlink(public_path('uploads').DIRECTORY_SEPARATOR.$post->featured);
+            if( public_path('uploads').DIRECTORY_SEPARATOR.$page->featured){
+                unlink(public_path('uploads').DIRECTORY_SEPARATOR.$page->featured);
             }
         }
 
         $data['slug'] = Str::slug($request->title);
-        $data['featured'] = $request->hasfile('featured') ? $fileName : $post->featured;
+        $data['featured'] = $request->hasfile('featured') ? $fileName : $page->featured;
         
-        $post->update($data);
-        Session::flash('success', 'Postagem editada com sucesso!');
-        return Redirect::route('posts.show', [ 'post' => $post->id ]);
+        $page->update($data);
+        Session::flash('success', 'Página editada com sucesso!');
+        return Redirect::route('pages.show', [ 'page' => $page->id ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Post  $page
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $page)
     {
-        if( public_path('uploads').DIRECTORY_SEPARATOR.$post->featured){
-            unlink(public_path('uploads').DIRECTORY_SEPARATOR.$post->featured);
+        if( public_path('uploads').DIRECTORY_SEPARATOR.$page->featured){
+            unlink(public_path('uploads').DIRECTORY_SEPARATOR.$page->featured);
         }
-        $post->delete($post);
-        Session::flash('success', 'Postagem deletada com sucesso!');
-        return Redirect::route('posts.index');
+        $page->delete($page);
+        Session::flash('success', 'Página deletada com sucesso!');
+        return Redirect::route('pages.index');
     }
 }

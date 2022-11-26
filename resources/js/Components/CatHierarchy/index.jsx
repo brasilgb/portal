@@ -23,7 +23,7 @@ const CatHierarchy = ({ data, catid }) => {
                                         <ButtonEdit url={route('categories.edit', category.id)} />
                                     </div>
                                     <div className="ml-1">
-                                        <ButtonDelete url="categories.destroy" param={category.id} />
+                                        <ButtonDelete url="categories.destroy" param={category.id} tipo="esta categoria" />
                                     </div>
                                 </div>
                             </ATd>
@@ -46,7 +46,7 @@ const CatHierarchy = ({ data, catid }) => {
                                                     <ButtonEdit url={route('categories.edit', category.id)} />
                                                 </div>
                                                 <div className="ml-1">
-                                                    <ButtonDelete url="categories.destroy" param={category.id} />
+                                                    <ButtonDelete url="categories.destroy" param={category.id} tipo="esta categoria" />
                                                 </div>
                                             </div>
                                         </ATd>
@@ -69,7 +69,7 @@ const CatHierarchy = ({ data, catid }) => {
                                                                 <ButtonEdit url={route('categories.edit', category.id)} />
                                                             </div>
                                                             <div className="ml-1">
-                                                                <ButtonDelete url="categories.destroy" param={category.id} />
+                                                                <ButtonDelete url="categories.destroy" param={category.id} tipo="esta categoria" />
                                                             </div>
                                                         </div>
                                                     </ATd>
@@ -92,7 +92,7 @@ const CatHierarchy = ({ data, catid }) => {
                                                                             <ButtonEdit url={route('categories.edit', category.id)} />
                                                                         </div>
                                                                         <div className="ml-1">
-                                                                            <ButtonDelete url="categories.destroy" param={category.id} />
+                                                                            <ButtonDelete url="categories.destroy" param={category.id} tipo="esta categoria" />
                                                                         </div>
                                                                     </div>
                                                                 </ATd>
@@ -115,7 +115,7 @@ const CatHierarchy = ({ data, catid }) => {
                                                                                         <ButtonEdit url={route('categories.edit', category.id)} />
                                                                                     </div>
                                                                                     <div className="ml-1">
-                                                                                        <ButtonDelete url="categories.destroy" param={category.id} />
+                                                                                        <ButtonDelete url="categories.destroy" param={category.id} tipo="esta categoria" />
                                                                                     </div>
                                                                                 </div>
                                                                             </ATd>

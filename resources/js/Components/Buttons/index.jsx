@@ -62,7 +62,7 @@ export const ButtonEdit = ({ url }) => {
     )
 }
 
-export const ButtonDelete = ({ url, param }) => {
+export const ButtonDelete = ({ url, param, tipo }) => {
 
     const [deleteModal, setDeleteModal] = useState(false);
     const { delete: destroy } = useForm();
@@ -107,7 +107,7 @@ export const ButtonDelete = ({ url, param }) => {
                                 </div>
 
                                 <h2 className="text-xl font-bold py-4 ">Têm certeza?</h2>
-                                <p className="text-sm text-gray-500 px-8">Quer excluir esta categoria?
+                                <p className="text-sm text-gray-500 px-8">Quer excluir {tipo}?
                                     Este processo não pode ser desfeito.</p>
                             </div>
                             <form onSubmit={onsubmit}>

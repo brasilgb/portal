@@ -27,7 +27,7 @@ class CategoryController extends Controller
             $query->where('name', 'like', '%'. $search .'%');
         }
 
-        $categories = $query->paginate(15);
+        $categories = $query->paginate(10);
 
         return Inertia::render('Admin/Categories/index', ['categories' => $categories]);
     }

@@ -28,8 +28,10 @@ const SideBar = () => {
                 <div className="flex flex-col justify-between flex-1 mt-6">
                     <nav>
                         <Link
+                            as="button"
+                            type="button"
                             href={route('admin')}
-                            className={`flex items-center px-4 py-2 mt-4 transition-colors duration-300 transform 
+                            className={`w-full flex items-center px-4 py-2 mt-4 transition-colors duration-300 transform 
                             ${route().current('admin')
                                     ? "text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
                                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"}
@@ -44,8 +46,10 @@ const SideBar = () => {
                         </Link>
 
                         <Link
+                            as="button"
+                            type="button"
                             href={route('categories.index')}
-                            className={`flex items-center px-4 py-2 mt-4 transition-colors duration-300 transform 
+                            className={`w-full flex items-center px-4 py-2 mt-4 transition-colors duration-300 transform 
                             ${route().current('categories*')
                                     ? "text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
                                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"}
@@ -60,8 +64,10 @@ const SideBar = () => {
                         </Link>
 
                         <Link
+                            as="button"
+                            type="button"
                             href={route('posts.index')}
-                            className={`flex items-center px-4 py-2 mt-4 transition-colors duration-300 transform 
+                            className={`w-full flex items-center px-4 py-2 mt-4 transition-colors duration-300 transform 
                             ${route().current('posts*')
                                     ? "text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
                                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"}
@@ -75,7 +81,15 @@ const SideBar = () => {
                             <span className="mx-4 font-medium">Postagens</span>
                         </Link>
 
-                        <a className="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <Link
+                            as="button"
+                            type="button"
+                            href={route('pages.index')}
+                            className={`w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700
+                            ${route().current('pages*')
+                                    ? "text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
+                                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"}
+                            `}>
                             <IconContext.Provider value={{ className: "text-xl" }}>
                                 <div>
                                     <IoDocumentsOutline />
@@ -83,9 +97,12 @@ const SideBar = () => {
                             </IconContext.Provider>
 
                             <span className="mx-4 font-medium">Páginas</span>
-                        </a>
+                        </Link>
 
-                        <a className="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <Link 
+                        as="button"
+                        type="button"
+                        className="w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                             <IconContext.Provider value={{ className: "text-xl" }}>
                                 <div>
                                     <IoCog />
@@ -93,9 +110,12 @@ const SideBar = () => {
                             </IconContext.Provider>
 
                             <span className="mx-4 font-medium">Configurações</span>
-                        </a>
+                        </Link>
 
-                        <a className="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <Link 
+                        as="button"
+                        type="button"
+                        className="w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                             <IconContext.Provider value={{ className: "text-xl" }}>
                                 <div>
                                     <IoPersonSharp />
@@ -103,7 +123,7 @@ const SideBar = () => {
                             </IconContext.Provider>
                             <span className="mx-4 font-medium">Usuários</span>
 
-                        </a>
+                        </Link>
 
                     </nav>
                 </div>

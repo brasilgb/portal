@@ -8,28 +8,25 @@ import { useForm, usePage } from '@inertiajs/inertia-react';
 import FlashMessage from '@/Components/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
 
-const EdPost = ({ post, categories }) => {
+const EdPage = ({ page }) => {
     const { flash } = usePage().props;
 
     const { data, setData, errors } = useForm({
-        title: post.title,
-        summary: post.summary,
-        content: post.content,
-        category_id: post.category_id,
+        title: page.title,
+        summary: page.summary,
+        content: page.content,
         featured: null,
-        social: post.social,
-        linked: post.linked,
-        active: post.active
+        social: page.social,
+        linked: page.linked,
+        active: page.active
     });
 
     function submit(e) {
         e.preventDefault();
-        // put(route('posts.update', post.id));
-        Inertia.post(route('posts.update', post.id), {_method: 'put',
+        Inertia.post(route('pages.update', page.id), {_method: 'put',
             title: data.title,
             summary: data.summary,
             content: data.content,
-            category_id: data.category_id,
             featured: data.featured,
             social: data.social,
             active: data.active
@@ -37,22 +34,22 @@ const EdPost = ({ post, categories }) => {
     }
 
     return (
-        <AdminLayout title="Postagens">
+        <AdminLayout title="Páginas">
             <BoxMain>
                 <BoxSup
                     titleTop={[{
-                        'title': "Postagens",
+                        'title': "Páginas",
                         'icon': <IoGridOutline />
                     }]}
                     breadcumb={[
-                        { 'value': 'Postagens', 'url': 'posts.index', 'separator': '/' },
+                        { 'value': 'Páginas', 'url': 'pages.index', 'separator': '/' },
                         { 'value': 'Alterar', 'url': '', 'separator': '' },
                     ]}
                 />
                 <BoxContainer>
                     <BoxHeader>
-                        <ButtonNew url="posts.index" icon={<IoArrowBackOutline />} value="Voltar" />
-                        <FormSearch url="posts.index" placeholder="Buscar por postagem" />
+                        <ButtonNew url="pages.index" icon={<IoArrowBackOutline />} value="Voltar" />
+                        <FormSearch url="pages.index" placeholder="Buscar por postagem" />
                     </BoxHeader>
                     <BoxContent>
                         {flash.message && (
@@ -94,7 +91,7 @@ const EdPost = ({ post, categories }) => {
                                     {errors.content && <div className="text-red-500">{errors.content}</div>}
                                 </div>
                                 <div className="w-48 p-2 bg-gray-100 border border-gray-200 shadow-md rounded-md">
-                                    <img src={`/uploads/${post.featured}`} alt="" />
+                                    <img src={`/uploads/${page.featured}`} alt="" />
                                 </div>
                                 <div>
                                     <label className="text-gray-700" htmlFor="summary">Imagem destacada</label>
@@ -107,21 +104,6 @@ const EdPost = ({ post, categories }) => {
 
                                 </div>
 
-                                <div>
-                                    <label className="text-gray-700" htmlFor="category_id" >Categoria</label>
-                                    <select
-                                        name="category_id"
-                                        id="category_id"
-                                        value={data.category_id}
-                                        onChange={(e) => setData('category_id', e.target.value)}
-                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                    >
-                                        <option value="0">Selecione uma categoria</option>
-                                        {categories.map((category, indexCategory) => (
-                                            <option key={indexCategory} value={category.id}>{category.name}</option>
-                                        ))}
-                                    </select>
-                                </div>
                             </div>
                             <div className="flex items-center mt-2">
                                 <input
@@ -170,4 +152,4 @@ const EdPost = ({ post, categories }) => {
     )
 }
 
-export default EdPost;
+export default EdPage;

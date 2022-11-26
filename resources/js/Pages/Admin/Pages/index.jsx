@@ -9,26 +9,26 @@ import APagination from '@/Components/Pagination';
 import { usePage } from '@inertiajs/inertia-react';
 import FlashMessage from '@/Components/FlashMessage';
 
-const Posts = ({ posts }) => {
+const Pages = ({ pages }) => {
     const { flash } = usePage().props;
 
     return (
 
-        <AdminLayout title="Postagens">
+        <AdminLayout title="Páginas">
             <BoxMain>
                 <BoxSup
                     titleTop={[{
-                        'title': "Postagens",
+                        'title': "Páginas",
                         'icon': <IoGridOutline />
                     }]}
                     breadcumb={[
-                        { 'value': 'Postagens', 'url': '', 'separator': '' }
+                        { 'value': 'Páginas', 'url': '', 'separator': '' }
                     ]}
                 />
                 <BoxContainer>
                     <BoxHeader>
-                        <ButtonNew url="posts.create" icon={<IoAdd />} value="Adicionar" />
-                        <FormSearch url="posts.index" placeholder="Buscar por postagem" />
+                        <ButtonNew url="pages.create" icon={<IoAdd />} value="Adicionar" />
+                        <FormSearch url="pages.index" placeholder="Buscar por postagem" />
                     </BoxHeader>
                     <BoxContent>
                         {flash.message && (
@@ -41,26 +41,24 @@ const Posts = ({ posts }) => {
                                     <ATh>Title</ATh>
                                     <ATh>Slug</ATh>
                                     <ATh>Resumo</ATh>
-                                    <ATh>Categoria</ATh>
                                     <ATh></ATh>
                                 </ATr>
-                                {posts.data.map((post, index) => (
+                                {pages.data.map((page, index) => (
                                     <Fragment key={index}>
                                         <ATr header={false}>
-                                            <ATd>{post.id}</ATd>
-                                            <ATd>{post.title}</ATd>
-                                            <ATd>{post.slug}</ATd>
+                                            <ATd>{page.id}</ATd>
+                                            <ATd>{page.title}</ATd>
+                                            <ATd>{page.slug}</ATd>
                                             <ATd>
-                                                {post.summary}
+                                                {page.summary}
                                             </ATd>
-                                            <ATd>{post.categories.name}</ATd>
                                             <ATd>
                                                 <div className="flex items-center justify-end">
                                                     <div className="mr-1">
-                                                        <ButtonEdit url={route('posts.edit', post.id)} />
+                                                        <ButtonEdit url={route('pages.edit', page.id)} />
                                                     </div>
                                                     <div className="ml-1">
-                                                        <ButtonDelete url="posts.destroy" param={post.id} tipo="esta postagem" />
+                                                        <ButtonDelete url="pages.destroy" param={page.id} tipo="esta página" />
                                                     </div>
                                                 </div>
                                             </ATd>
@@ -72,7 +70,7 @@ const Posts = ({ posts }) => {
                     </BoxContent>
                     {APagination &&
                         <BoxFooter>
-                            <APagination data={posts} />
+                            <APagination data={pages} />
                         </BoxFooter>
                     }
                 </BoxContainer>
@@ -81,4 +79,4 @@ const Posts = ({ posts }) => {
     )
 }
 
-export default Posts;
+export default Pages;
