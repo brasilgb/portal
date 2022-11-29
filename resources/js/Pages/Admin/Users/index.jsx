@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { IoDocumentOutline, IoAdd } from 'react-icons/io5';
+import { IoPersonSharp, IoAdd } from 'react-icons/io5';
 import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { ATable, ATd, ATh, ATr } from '@/Components/Table';
@@ -9,26 +9,26 @@ import APagination from '@/Components/Pagination';
 import { usePage } from '@inertiajs/inertia-react';
 import FlashMessage from '@/Components/FlashMessage';
 
-const Pages = ({ pages }) => {
+const Users = ({ users }) => {
     const { flash } = usePage().props;
 
     return (
 
-        <AdminLayout title="Páginas">
+        <AdminLayout title="Usuários">
             <BoxMain>
                 <BoxSup
                     titleTop={[{
-                        'title': "Páginas",
-                        'icon': <IoDocumentOutline />
+                        'title': "Usuários",
+                        'icon': <IoPersonSharp />
                     }]}
                     breadcumb={[
-                        { 'value': 'Páginas', 'url': '', 'separator': '' }
+                        { 'value': 'Usuários', 'url': '', 'separator': '' }
                     ]}
                 />
                 <BoxContainer>
                     <BoxHeader>
-                        <ButtonNew url="pages.create" icon={<IoAdd />} value="Adicionar" />
-                        <FormSearch url="pages.index" placeholder="Buscar por postagem" />
+                        <ButtonNew url="users.create" icon={<IoAdd />} value="Adicionar" />
+                        <FormSearch url="users.index" placeholder="Buscar por usuário" />
                     </BoxHeader>
                     <BoxContent>
                         {flash.message && (
@@ -38,27 +38,25 @@ const Pages = ({ pages }) => {
                             <ATable>
                                 <ATr header={true}>
                                     <ATh>#</ATh>
-                                    <ATh>Title</ATh>
-                                    <ATh>Slug</ATh>
-                                    <ATh>Resumo</ATh>
+                                    <ATh>Nome</ATh>
+                                    <ATh>Usuário</ATh>
+                                    <ATh>E-mail</ATh>
                                     <ATh></ATh>
                                 </ATr>
-                                {pages.data.map((page, index) => (
+                                {users.data.map((user, index) => (
                                     <Fragment key={index}>
                                         <ATr header={false}>
-                                            <ATd>{page.id}</ATd>
-                                            <ATd>{page.title}</ATd>
-                                            <ATd>{page.slug}</ATd>
-                                            <ATd>
-                                                {page.summary}
-                                            </ATd>
+                                            <ATd>{user.id}</ATd>
+                                            <ATd>{user.name}</ATd>
+                                            <ATd>{user.username}</ATd>
+                                            <ATd>{user.email}</ATd>
                                             <ATd>
                                                 <div className="flex items-center justify-end">
                                                     <div className="mr-1">
-                                                        <ButtonEdit url={route('pages.edit', page.id)} />
+                                                        <ButtonEdit url={route('users.edit', user.id)} />
                                                     </div>
                                                     <div className="ml-1">
-                                                        <ButtonDelete url="pages.destroy" param={page.id} tipo="esta página" />
+                                                        <ButtonDelete url="users.destroy" param={user.id} tipo="este usuário" />
                                                     </div>
                                                 </div>
                                             </ATd>
@@ -70,7 +68,7 @@ const Pages = ({ pages }) => {
                     </BoxContent>
                     {APagination &&
                         <BoxFooter>
-                            <APagination data={pages} />
+                            <APagination data={users} />
                         </BoxFooter>
                     }
                 </BoxContainer>
@@ -79,4 +77,4 @@ const Pages = ({ pages }) => {
     )
 }
 
-export default Pages;
+export default Users;

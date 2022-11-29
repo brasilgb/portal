@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,8 @@ Route::get('/admin', [HomeController::class, 'index'])->name('admin');
 Route::resource('/admin/categories', CategoryController::class);
 Route::resource('/admin/posts', PostController::class);
 Route::resource('/admin/pages', PageController::class);
+Route::resource('/admin/settings', SettingsController::class);
+Route::resource('/admin/users', UserController::class);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

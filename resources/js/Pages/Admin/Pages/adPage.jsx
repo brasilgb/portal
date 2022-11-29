@@ -1,7 +1,7 @@
 import React from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { IoGridOutline, IoArrowBackOutline } from 'react-icons/io5';
+import { IoDocumentOutline, IoArrowBackOutline } from 'react-icons/io5';
 import { ButtonNew, ButtonSave } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { useForm } from '@inertiajs/inertia-react';
@@ -30,7 +30,7 @@ const AdPage = () => {
                 <BoxSup
                     titleTop={[{
                         'title': "Páginas",
-                        'icon': <IoGridOutline />
+                        'icon': <IoDocumentOutline />
                     }]}
                     breadcumb={[
                         { 'value': 'Páginas', 'url': 'pages.index', 'separator': '/' },

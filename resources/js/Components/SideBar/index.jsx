@@ -99,10 +99,15 @@ const SideBar = () => {
                             <span className="mx-4 font-medium">Páginas</span>
                         </Link>
 
-                        <Link 
-                        as="button"
-                        type="button"
-                        className="w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <Link
+                            as="button"
+                            type="button"
+                            href={route('settings.index')}
+                            className={`w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700
+                            ${route().current('settings*')
+                                    ? "text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
+                                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"}
+                            `}>
                             <IconContext.Provider value={{ className: "text-xl" }}>
                                 <div>
                                     <IoCog />
@@ -112,10 +117,15 @@ const SideBar = () => {
                             <span className="mx-4 font-medium">Configurações</span>
                         </Link>
 
-                        <Link 
-                        as="button"
-                        type="button"
-                        className="w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <Link
+                            as="button"
+                            type="button"
+                            href={route('users.index')}
+                            className={`w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700
+                            ${route().current('users*')
+                                    ? "text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
+                                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"}
+                            `}>
                             <IconContext.Provider value={{ className: "text-xl" }}>
                                 <div>
                                     <IoPersonSharp />

@@ -114,7 +114,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->all();
-        // dd($data);
+
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!'
         ];

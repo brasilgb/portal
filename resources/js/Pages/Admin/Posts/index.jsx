@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { IoGridOutline, IoAdd } from 'react-icons/io5';
+import { IoDocumentTextOutline, IoAdd } from 'react-icons/io5';
 import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { ATable, ATd, ATh, ATr } from '@/Components/Table';
@@ -19,7 +19,7 @@ const Posts = ({ posts }) => {
                 <BoxSup
                     titleTop={[{
                         'title': "Postagens",
-                        'icon': <IoGridOutline />
+                        'icon': <IoDocumentTextOutline />
                     }]}
                     breadcumb={[
                         { 'value': 'Postagens', 'url': '', 'separator': '' }

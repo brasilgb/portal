@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->string('logo');
-            $table->text('address');
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('logo')->nullable();
+            $table->text('address')->nullable();
             $table->text('maps')->nullable();
-            $table->text('contacts');
+            $table->text('contacts')->nullable();
             $table->timestamp('created_at')->useCurrent();
-$table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

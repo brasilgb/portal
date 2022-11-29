@@ -1,7 +1,7 @@
 import React from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { IoGridOutline, IoArrowBackOutline } from 'react-icons/io5';
+import { IoDocumentOutline, IoArrowBackOutline } from 'react-icons/io5';
 import { ButtonNew, ButtonSave } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
@@ -39,7 +39,7 @@ const EdPage = ({ page }) => {
                 <BoxSup
                     titleTop={[{
                         'title': "Páginas",
-                        'icon': <IoGridOutline />
+                        'icon': <IoDocumentOutline />
                     }]}
                     breadcumb={[
                         { 'value': 'Páginas', 'url': 'pages.index', 'separator': '/' },
@@ -101,7 +101,6 @@ const EdPage = ({ page }) => {
                                         onChange={(e) => setData('featured', e.target.files[0])}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                     />
-
                                 </div>
 
                             </div>

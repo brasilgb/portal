@@ -1,7 +1,7 @@
 import React from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { IoGridOutline, IoArrowBackOutline } from 'react-icons/io5';
+import { IoDocumentTextOutline, IoArrowBackOutline } from 'react-icons/io5';
 import { ButtonNew, ButtonSave } from '@/Components/Buttons';
 import { FormSearch } from '@/Components/Form';
 import { useForm } from '@inertiajs/inertia-react';
@@ -30,7 +30,7 @@ const AdPost = ({ categories }) => {
                 <BoxSup
                     titleTop={[{
                         'title': "Postagens",
-                        'icon': <IoGridOutline />
+                        'icon': <IoDocumentTextOutline />
                     }]}
                     breadcumb={[
                         { 'value': 'Postagens', 'url': 'posts.index', 'separator': '/' },

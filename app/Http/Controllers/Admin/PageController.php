@@ -110,7 +110,7 @@ class PageController extends Controller
     public function update(Request $request, Post $page)
     {
         $data = $request->all();
-        // dd($data);
+
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido!'
         ];

@@ -80,7 +80,7 @@ export const BoxContainer = ({ children }) => {
 export const BoxHeader = ({ children }) => {
     return (
         <Fragment>
-            <div className="flex items-center justify-between border-b border-gray-100 py-2 px-4">
+            <div className="w-full flex items-center justify-between border-b border-gray-100 py-2 px-4">
                 {children}
             </div>
         </Fragment>
@@ -90,7 +90,7 @@ export const BoxHeader = ({ children }) => {
 export const BoxContent = ({ children }) => {
     return (
         <Fragment>
-            <div className="p-4">
+            <div className="p-4 overflow-auto">
                 {children}
             </div>
         </Fragment>
