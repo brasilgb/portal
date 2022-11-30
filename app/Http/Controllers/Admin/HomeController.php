@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Home;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,7 +19,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/Home/index');
+        $categories = Category::get()->count();
+        $posts = Post::where('type', 1)->get()->count();
+        $pages = Post::where('type', 0)->get()->count();
+        $users = User::get()->count();
+
+        return Inertia::render('Admin/Home/index', [ 
+            'categories' => $categories,
+            'posts' => $posts,
+            'pages' => $pages,
+            'users' => $users
+         ]);
     }
 
     /**

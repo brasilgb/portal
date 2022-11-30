@@ -1,9 +1,9 @@
 import React from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoDocumentOutline, IoArrowBackOutline } from 'react-icons/io5';
-import { ButtonNew, ButtonSave } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
+import { ButtonNew, ButtonSave } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
 import { useForm } from '@inertiajs/inertia-react';
 
 const AdPage = () => {
@@ -40,7 +40,7 @@ const AdPage = () => {
                 <BoxContainer>
                     <BoxHeader>
                         <ButtonNew url="pages.index" icon={<IoArrowBackOutline />} value="Voltar" />
-                        <FormSearch url="pages.index" placeholder="Buscar por páginas" />
+                        <FormSearch url="pages.index" placeholder="Buscar por página" />
                     </BoxHeader>
                     <BoxContent>
                         <form onSubmit={submit}>
@@ -95,7 +95,7 @@ const AdPage = () => {
                                     {errors.featured && <div className="text-red-500">{errors.featured}</div>}
                                 </div>
 
-                                <div className="flex items-center mt-2">
+                                <div className="flex items-center">
                                     <input
                                         type="checkbox"
                                         id="social"
@@ -106,7 +106,7 @@ const AdPage = () => {
                                     <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
                                 </div>
 
-                                <div className="flex items-center mt-2">
+                                <div className="flex items-center">
                                     <input
                                         type="checkbox"
                                         id="linked"
@@ -117,7 +117,6 @@ const AdPage = () => {
                                     <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
                                 </div>
                             </div>
-
 
                             <div className="flex justify-end mt-6">
                                 <ButtonSave />

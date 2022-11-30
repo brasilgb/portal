@@ -1,6 +1,6 @@
-import Footer from '@/Components/Footer';
-import NavBar from '@/Components/NavBar';
-import SideBar from '@/Components/SideBar';
+import Footer from '@/Components/Admin/Footer';
+import NavBar from '@/Components/Admin/NavBar';
+import SideBar from '@/Components/Admin/SideBar';
 import { Head } from '@inertiajs/inertia-react';
 import React, { Fragment } from 'react';
 

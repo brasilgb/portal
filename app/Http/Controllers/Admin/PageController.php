@@ -67,12 +67,14 @@ class PageController extends Controller
             'content' => 'conteúdo',
             'featured' => 'imagem destacada'
         ]);
-
+        
+        if ($request->hasfile('featured')) {
         $fileName = time().'.'.$request->featured->extension();  
         $request->featured->move(public_path('uploads'), $fileName);
+        }
 
         $data['slug'] = Str::slug($request->title);
-        $data['featured'] = $fileName;
+        $data['featured'] = $request->hasfile('featured') ? $fileName : Null;
         Post::create($data);
         Session::flash('success', 'Página criada com sucesso!');
         return redirect()->route('pages.index');

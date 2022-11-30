@@ -93,7 +93,8 @@ class SettingsController extends Controller
             'logo' => $request->hasfile('logo') ? $fileName : $settings->first()->logo,
             'address' => $request->address,
             'maps' => $request->maps,
-            'contacts' => $request->contacts
+            'contacts' => $request->contacts,
+            'copy' => $request->copy
         ]);
         Session::flash('success', 'Configuracões editadas com sucesso!');
         return Redirect::route('settings.index');

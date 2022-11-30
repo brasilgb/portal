@@ -70,7 +70,7 @@ export const BoxSup = ({ titleTop, breadcumb }) => {
 export const BoxContainer = ({ children }) => {
     return (
         <Fragment>
-            <div className="rounded-md shadow bg-white border border-gray-300">
+            <div className="rounded-md shadow bg-white border border-gray-300 mb-4">
                 {children}
             </div>
         </Fragment>

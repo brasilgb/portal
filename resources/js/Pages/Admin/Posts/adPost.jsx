@@ -1,9 +1,9 @@
 import React from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoDocumentTextOutline, IoArrowBackOutline } from 'react-icons/io5';
-import { ButtonNew, ButtonSave } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
+import { ButtonNew, ButtonSave } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
 import { useForm } from '@inertiajs/inertia-react';
 
 const AdPost = ({ categories }) => {
@@ -111,28 +111,28 @@ const AdPost = ({ categories }) => {
                                     </select>
                                     {errors.category_id && <div className="text-red-500">{errors.category_id}</div>}
                                 </div>
-                            </div>
 
-                            <div className="flex items-center mt-2">
-                                <input
-                                    type="checkbox"
-                                    id="social"
-                                    checked={data.social}
-                                    onChange={(e) => setData('social', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
-                            </div>
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="social"
+                                        checked={data.social}
+                                        onChange={(e) => setData('social', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
+                                </div>
 
-                            <div className="flex items-center mt-2">
-                                <input
-                                    type="checkbox"
-                                    id="linked"
-                                    checked={data.linked}
-                                    onChange={(e) => setData('linked', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="linked"
+                                        checked={data.linked}
+                                        onChange={(e) => setData('linked', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
+                                </div>
                             </div>
                             <div className="flex justify-end mt-6">
                                 <ButtonSave />

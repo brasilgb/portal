@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { IoDocumentTextOutline, IoAdd } from 'react-icons/io5';
-import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
-import { ATable, ATd, ATh, ATr } from '@/Components/Table';
-import APagination from '@/Components/Pagination';
+import { IoDocumentTextOutline, IoAdd, IoChevronDownCircleSharp, IoCloseCircleSharp } from 'react-icons/io5';
+import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
+import { ATable, ATd, ATh, ATr } from '@/Components/Admin/Table';
+import APagination from '@/Components/Admin/Pagination';
 import { usePage } from '@inertiajs/inertia-react';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Admin/FlashMessage';
+import { IconContext } from 'react-icons';
 
 const Posts = ({ posts }) => {
     const { flash } = usePage().props;
@@ -42,6 +43,7 @@ const Posts = ({ posts }) => {
                                     <ATh>Slug</ATh>
                                     <ATh>Resumo</ATh>
                                     <ATh>Categoria</ATh>
+                                    <ATh>Ativo</ATh>
                                     <ATh></ATh>
                                 </ATr>
                                 {posts.data.map((post, index) => (
@@ -54,6 +56,14 @@ const Posts = ({ posts }) => {
                                                 {post.summary}
                                             </ATd>
                                             <ATd>{post.categories.name}</ATd>
+                                            <ATd>
+                                                <IconContext.Provider value={{ className: `text-2xl ${post.active ? 'text-green-600' : 'text-red-500'}` }}>
+                                                    {post.active
+                                                        ? <IoChevronDownCircleSharp />
+                                                        : <IoCloseCircleSharp />
+                                                    }
+                                                </IconContext.Provider>
+                                            </ATd>
                                             <ATd>
                                                 <div className="flex items-center justify-end">
                                                     <div className="mr-1">

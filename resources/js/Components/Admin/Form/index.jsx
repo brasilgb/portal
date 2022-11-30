@@ -1,9 +1,10 @@
 import React, { Fragment, useRef, useState } from 'react'
 import { IconContext } from 'react-icons';
 import { IoSearch } from 'react-icons/io5';
-import { useForm } from '@inertiajs/inertia-react'
+import { useForm, usePage } from '@inertiajs/inertia-react'
 
 export const FormSearch = ({ placeholder, url }) => {
+    const { auth } = usePage().props;
     const { data, setData, post, get, processing, errors } = useForm({
         q: '',
     });
@@ -31,6 +32,7 @@ export const FormSearch = ({ placeholder, url }) => {
                         </button>
 
                         <input
+                            disabled={auth.user.role === 1 ? true : false}
                             name="search"
                             value={data.q}
                             onChange={(e) => setData('q', e.target.value)}

@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react'
+import { IconContext } from 'react-icons';
+import { IoChevronDownCircleSharp, IoCloseCircleSharp } from 'react-icons/io5';
 import { ButtonDelete, ButtonEdit } from '../Buttons';
 import { ATd, ATr } from '../Table';
 
@@ -17,6 +19,14 @@ const CatHierarchy = ({ data, catid }) => {
                                 {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                             </ATd>
                             <ATd>{category.postagens.length}</ATd>
+                            <ATd>
+                                <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
+                                    {category.active
+                                        ? <IoChevronDownCircleSharp />
+                                        : <IoCloseCircleSharp />
+                                    }
+                                </IconContext.Provider>
+                            </ATd>
                             <ATd>
                                 <div className="flex items-center justify-end">
                                     <div className="mr-1">
@@ -41,6 +51,14 @@ const CatHierarchy = ({ data, catid }) => {
                                         </ATd>
                                         <ATd>{category.postagens.length}</ATd>
                                         <ATd>
+                                            <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
+                                                {category.active
+                                                    ? <IoChevronDownCircleSharp />
+                                                    : <IoCloseCircleSharp />
+                                                }
+                                            </IconContext.Provider>
+                                        </ATd>
+                                        <ATd>
                                             <div className="flex items-center justify-end">
                                                 <div className="mr-1">
                                                     <ButtonEdit url={route('categories.edit', category.id)} />
@@ -63,6 +81,14 @@ const CatHierarchy = ({ data, catid }) => {
                                                         {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                     </ATd>
                                                     <ATd>{category.postagens.length}</ATd>
+                                                    <ATd>
+                                                        <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
+                                                            {category.active
+                                                                ? <IoChevronDownCircleSharp />
+                                                                : <IoCloseCircleSharp />
+                                                            }
+                                                        </IconContext.Provider>
+                                                    </ATd>
                                                     <ATd>
                                                         <div className="flex items-center justify-end">
                                                             <div className="mr-1">
@@ -87,6 +113,14 @@ const CatHierarchy = ({ data, catid }) => {
                                                                 </ATd>
                                                                 <ATd>{category.postagens.length}</ATd>
                                                                 <ATd>
+                                                                    <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
+                                                                        {category.active
+                                                                            ? <IoChevronDownCircleSharp />
+                                                                            : <IoCloseCircleSharp />
+                                                                        }
+                                                                    </IconContext.Provider>
+                                                                </ATd>
+                                                                <ATd>
                                                                     <div className="flex items-center justify-end">
                                                                         <div className="mr-1">
                                                                             <ButtonEdit url={route('categories.edit', category.id)} />
@@ -109,6 +143,14 @@ const CatHierarchy = ({ data, catid }) => {
                                                                                 {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                                             </ATd>
                                                                             <ATd>{category.postagens.length}</ATd>
+                                                                            <ATd>
+                                                                                <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
+                                                                                    {category.active
+                                                                                        ? <IoChevronDownCircleSharp />
+                                                                                        : <IoCloseCircleSharp />
+                                                                                    }
+                                                                                </IconContext.Provider>
+                                                                            </ATd>
                                                                             <ATd>
                                                                                 <div className="flex items-center justify-end">
                                                                                     <div className="mr-1">

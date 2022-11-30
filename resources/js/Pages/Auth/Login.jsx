@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import { IconContext } from 'react-icons';
+import { IoLockClosedOutline, IoMailOutline } from 'react-icons/io5';
 
 export default function Login({ status, canResetPassword }) {
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -38,41 +40,57 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel forInput="email" value="Email" />
-
-                    <TextInput
-                        type="text"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                    />
-
+                    <div className='flex items-center justify-between'>
+                        <div className="flex-none items-center justify-center rounded-tl-lg rounded-bl-lg border border-gray-300 bg-white p-2 shadow-sm">
+                            <IconContext.Provider value={{ className: 'text-2xl w-5 fill-gray-500' }}>
+                                <div>
+                                    <IoMailOutline />
+                                </div>
+                            </IconContext.Provider>
+                        </div>
+                        <div className='flex-1'>
+                            <TextInput
+                                type="text"
+                                name="email"
+                                value={data.email}
+                                className="block w-full border-l-0 rounded-l-none focus:ring-0"
+                                autoComplete="username"
+                                isFocused={true}
+                                handleChange={onHandleChange}
+                            />
+                        </div>
+                    </div>
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel forInput="password" value="Password" />
-
-                    <TextInput
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        handleChange={onHandleChange}
-                    />
-
+                <div>
+                    <div className='flex items-center justify-between mt-4'>
+                        <div className="flex-none items-center justify-center rounded-tl-lg rounded-bl-lg border border-gray-300 bg-white p-2 shadow-sm">
+                            <IconContext.Provider value={{ className: 'text-2xl w-5 fill-gray-500' }}>
+                                <div>
+                                    <IoLockClosedOutline />
+                                </div>
+                            </IconContext.Provider>
+                        </div>
+                        <div className='flex-1'>
+                            <TextInput
+                                type="password"
+                                name="password"
+                                value={data.password}
+                                className="block w-full border-l-0 rounded-l-none focus:ring-0"
+                                autoComplete="current-password"
+                                handleChange={onHandleChange}
+                            />
+                        </div>
+                    </div>
                     <InputError message={errors.password} className="mt-2" />
                 </div>
-
+                
                 <div className="block mt-4">
                     <label className="flex items-center">
                         <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
 
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                        <span className="ml-2 text-sm text-gray-600">Lembre de mim</span>
                     </label>
                 </div>
 
@@ -82,12 +100,12 @@ export default function Login({ status, canResetPassword }) {
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 hover:text-gray-900"
                         >
-                            Forgot your password?
+                            Esqueceu sua senha?
                         </Link>
                     )}
 
                     <PrimaryButton className="ml-4" processing={processing}>
-                        Log in
+                        Entrar
                     </PrimaryButton>
                 </div>
             </form>

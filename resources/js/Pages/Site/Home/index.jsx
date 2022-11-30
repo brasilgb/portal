@@ -1,14 +1,15 @@
+import SiteLayout from '@/Layouts/SiteLayout';
 import { Head } from '@inertiajs/inertia-react';
 import React, { Fragment } from 'react'
 
 const Home = () => {
   return (
-    <Fragment>
+    <SiteLayout>
         <Head title="Home" />
         <div>
             Home
         </div>
-    </Fragment>
+    </SiteLayout>
   )
 }
 

@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { IoDocumentOutline, IoAdd } from 'react-icons/io5';
-import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
-import { ATable, ATd, ATh, ATr } from '@/Components/Table';
-import APagination from '@/Components/Pagination';
+import { IoDocumentOutline, IoAdd, IoChevronDownCircleSharp, IoCloseCircleSharp } from 'react-icons/io5';
+import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
+import { ATable, ATd, ATh, ATr } from '@/Components/Admin/Table';
+import APagination from '@/Components/Admin/Pagination';
 import { usePage } from '@inertiajs/inertia-react';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Admin/FlashMessage';
+import { IconContext } from 'react-icons';
 
 const Pages = ({ pages }) => {
     const { flash } = usePage().props;
@@ -28,7 +29,7 @@ const Pages = ({ pages }) => {
                 <BoxContainer>
                     <BoxHeader>
                         <ButtonNew url="pages.create" icon={<IoAdd />} value="Adicionar" />
-                        <FormSearch url="pages.index" placeholder="Buscar por postagem" />
+                        <FormSearch url="pages.index" placeholder="Buscar por página" />
                     </BoxHeader>
                     <BoxContent>
                         {flash.message && (
@@ -41,6 +42,7 @@ const Pages = ({ pages }) => {
                                     <ATh>Title</ATh>
                                     <ATh>Slug</ATh>
                                     <ATh>Resumo</ATh>
+                                    <ATh>Ativa</ATh>
                                     <ATh></ATh>
                                 </ATr>
                                 {pages.data.map((page, index) => (
@@ -51,6 +53,14 @@ const Pages = ({ pages }) => {
                                             <ATd>{page.slug}</ATd>
                                             <ATd>
                                                 {page.summary}
+                                            </ATd>
+                                            <ATd>
+                                                <IconContext.Provider value={{ className: `text-2xl ${page.active ? 'text-green-600' : 'text-red-500'}` }}>
+                                                    {page.active
+                                                        ? <IoChevronDownCircleSharp />
+                                                        : <IoCloseCircleSharp />
+                                                    }
+                                                </IconContext.Provider>
                                             </ATd>
                                             <ATd>
                                                 <div className="flex items-center justify-end">

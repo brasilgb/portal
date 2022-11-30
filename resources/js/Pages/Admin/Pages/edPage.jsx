@@ -1,11 +1,11 @@
 import React from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoDocumentOutline, IoArrowBackOutline } from 'react-icons/io5';
-import { ButtonNew, ButtonSave } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
+import { ButtonNew, ButtonSave } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Admin/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
 
 const EdPage = ({ page }) => {
@@ -23,7 +23,8 @@ const EdPage = ({ page }) => {
 
     function submit(e) {
         e.preventDefault();
-        Inertia.post(route('pages.update', page.id), {_method: 'put',
+        Inertia.post(route('pages.update', page.id), {
+            _method: 'put',
             title: data.title,
             summary: data.summary,
             content: data.content,
@@ -49,7 +50,7 @@ const EdPage = ({ page }) => {
                 <BoxContainer>
                     <BoxHeader>
                         <ButtonNew url="pages.index" icon={<IoArrowBackOutline />} value="Voltar" />
-                        <FormSearch url="pages.index" placeholder="Buscar por postagem" />
+                        <FormSearch url="pages.index" placeholder="Buscar por página" />
                     </BoxHeader>
                     <BoxContent>
                         {flash.message && (
@@ -103,41 +104,41 @@ const EdPage = ({ page }) => {
                                     />
                                 </div>
 
-                            </div>
-                            <div className="flex items-center mt-2">
-                                <input
-                                    type="checkbox"
-                                    id="active"
-                                    checked={data.active}
-                                    onChange={(e) => setData('active', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="active">Ativar página</label>
-                                {errors.active && <div className="text-red-500">{errors.active}</div>}
-                            </div>
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="active"
+                                        checked={data.active}
+                                        onChange={(e) => setData('active', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="active">Ativar página</label>
+                                    {errors.active && <div className="text-red-500">{errors.active}</div>}
+                                </div>
 
-                            <div className="flex items-center mt-2">
-                                <input
-                                    type="checkbox"
-                                    id="social"
-                                    checked={data.social}
-                                    onChange={(e) => setData('social', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
-                                {errors.social && <div className="text-red-500">{errors.social}</div>}
-                            </div>
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="social"
+                                        checked={data.social}
+                                        onChange={(e) => setData('social', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
+                                    {errors.social && <div className="text-red-500">{errors.social}</div>}
+                                </div>
 
-                            <div className="flex items-center mt-2">
-                                <input
-                                    type="checkbox"
-                                    id="linked"
-                                    checked={data.linked}
-                                    onChange={(e) => setData('linked', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
-                                {errors.linked && <div className="text-red-500">{errors.linked}</div>}
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="linked"
+                                        checked={data.linked}
+                                        onChange={(e) => setData('linked', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
+                                    {errors.linked && <div className="text-red-500">{errors.linked}</div>}
+                                </div>
                             </div>
                             <div className="flex justify-end mt-6">
                                 <ButtonSave />

@@ -1,11 +1,11 @@
 import React from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoDocumentTextOutline, IoArrowBackOutline } from 'react-icons/io5';
-import { ButtonNew, ButtonSave } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
+import { ButtonNew, ButtonSave } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Admin/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
 
 const EdPost = ({ post, categories }) => {
@@ -121,8 +121,8 @@ const EdPost = ({ post, categories }) => {
                                         ))}
                                     </select>
                                 </div>
-                            </div>
-                            <div className="flex items-center mt-2">
+
+                            <div className="flex items-center">
                                 <input
                                     type="checkbox"
                                     id="active"
@@ -134,7 +134,7 @@ const EdPost = ({ post, categories }) => {
                                 {errors.active && <div className="text-red-500">{errors.active}</div>}
                             </div>
 
-                            <div className="flex items-center mt-2">
+                            <div className="flex items-center">
                                 <input
                                     type="checkbox"
                                     id="social"
@@ -146,7 +146,7 @@ const EdPost = ({ post, categories }) => {
                                 {errors.social && <div className="text-red-500">{errors.social}</div>}
                             </div>
 
-                            <div className="flex items-center mt-2">
+                            <div className="flex items-center">
                                 <input
                                     type="checkbox"
                                     id="linked"
@@ -157,6 +157,7 @@ const EdPost = ({ post, categories }) => {
                                 <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
                                 {errors.linked && <div className="text-red-500">{errors.linked}</div>}
                             </div>
+                            </div>                            
                             <div className="flex justify-end mt-6">
                                 <ButtonSave />
                             </div>

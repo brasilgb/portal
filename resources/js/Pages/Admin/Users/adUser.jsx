@@ -1,20 +1,23 @@
 import React from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoPersonSharp, IoArrowBackOutline } from 'react-icons/io5';
-import { ButtonNew, ButtonSave } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
+import { ButtonNew, ButtonSave } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Admin/FlashMessage';
 
 const AdUser = () => {
     const { flash } = usePage().props;
 
-    const { data, setData, post, errors } = useForm({
+    const { data, setData, post, errors, progress } = useForm({
         name: '',
         username: '',
         email: '',
+        avatar: [],
         password: '',
+        active: 1,
+        role: ''
     });
 
     function submit(e) {
@@ -46,6 +49,22 @@ const AdUser = () => {
                         )}
                         <form onSubmit={submit}>
                             <div className="grid grid-cols-1 gap-6 mt-4">
+                            <div>
+                                    <label className="text-gray-700" htmlFor="avatar">Imagem avatar</label>
+                                    <input
+                                        type="file"
+                                        id="avatar"
+                                        onChange={(e) => setData('avatar', e.target.files[0])}
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    {progress && (
+                                        <progress value={progress.percentage} max="100">
+                                            {progress.percentage}%
+                                        </progress>
+                                    )}
+                                    {errors.avatar && <div className="text-red-500">{errors.avatar}</div>}
+                                </div>
+
                                 <div>
                                     <label className="text-gray-700" htmlFor="name">Nome</label>
                                     <input
@@ -82,7 +101,7 @@ const AdUser = () => {
                                 <div>
                                     <label className="text-gray-700" htmlFor="password">Senha</label>
                                     <input
-                                        type="text"
+                                        type="password"
                                         id="password"
                                         value={data.password}
                                         onChange={(e) => setData('password', e.target.value)}
@@ -90,16 +109,32 @@ const AdUser = () => {
                                     />
                                     {errors.password && <div className="text-red-500">{errors.password}</div>}
                                 </div>
+
                                 <div>
                                     <label className="text-gray-700" htmlFor="password_confirmation">Repita a senha</label>
                                     <input
-                                        type="text"
+                                        type="password"
                                         id="password_confirmation"
                                         value={data.password_confirmation}
                                         onChange={(e) => setData('password_confirmation', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                     />
                                     {errors.password_confirmation && <div className="text-red-500">{errors.password_confirmation}</div>}
+                                </div>
+                                
+                                <div>
+                                    <label className="text-gray-700" htmlFor="role" >Função</label>
+                                    <select
+                                        name="role"
+                                        id="role"
+                                        value={data.role}
+                                        onChange={(e) => setData('role', e.target.value)}
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    >
+                                        <option value="1">Editor</option>
+                                        <option value="2">Administrador</option>
+                                    </select>
+                                    {errors.role && <div className="text-red-500">{errors.role}</div>}
                                 </div>
 
                             </div>

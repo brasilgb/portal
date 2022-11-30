@@ -4,6 +4,8 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/inertia-react';
+import { IconContext } from 'react-icons';
+import { IoMailOutline } from 'react-icons/io5';
 
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -25,27 +27,38 @@ export default function ForgotPassword({ status }) {
             <Head title="Forgot Password" />
 
             <div className="mb-4 text-sm text-gray-500 leading-normal">
-                Forgot your password? No problem. Just let us know your email address and we will email you a password
-                reset link that will allow you to choose a new one.
+                Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de e-mail e enviaremos um e-mail com um link de redefinição de senha que permitirá que você escolha uma nova.
             </div>
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
-                <TextInput
-                    type="text"
-                    name="email"
-                    value={data.email}
-                    className="mt-1 block w-full"
-                    isFocused={true}
-                    handleChange={onHandleChange}
-                />
-
-                <InputError message={errors.email} className="mt-2" />
-
+                <div>
+                    <div className='flex items-center justify-between'>
+                        <div className="flex-none items-center justify-center rounded-tl-lg rounded-bl-lg border border-gray-300 bg-white p-2 shadow-sm">
+                            <IconContext.Provider value={{ className: 'text-2xl w-5 fill-gray-500' }}>
+                                <div>
+                                    <IoMailOutline />
+                                </div>
+                            </IconContext.Provider>
+                        </div>
+                        <div className='flex-1'>
+                            <TextInput
+                                type="text"
+                                name="email"
+                                value={data.email}
+                                className="block w-full border-l-0 rounded-l-none focus:ring-0"
+                                isFocused={true}
+                                handleChange={onHandleChange}
+                                placeholder="Digite o e-mail de sua conta"
+                            />
+                        </div>
+                    </div>
+                    <InputError message={errors.email} className="mt-2" />
+                </div>
                 <div className="flex items-center justify-end mt-4">
                     <PrimaryButton className="ml-4" processing={processing}>
-                        Email Password Reset Link
+                        Enviar Link
                     </PrimaryButton>
                 </div>
             </form>

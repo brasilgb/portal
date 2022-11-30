@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
-import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Boxes';
+import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoGridOutline, IoAdd } from 'react-icons/io5';
-import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Buttons';
-import { FormSearch } from '@/Components/Form';
-import { ATable, ATd, ATh, ATr } from '@/Components/Table';
-import APagination from '@/Components/Pagination';
-import CatHierarchy from '@/Components/CatHierarchy';
+import { ButtonDelete, ButtonEdit, ButtonNew } from '@/Components/Admin/Buttons';
+import { FormSearch } from '@/Components/Admin/Form';
+import { ATable, ATd, ATh, ATr } from '@/Components/Admin/Table';
+import APagination from '@/Components/Admin/Pagination';
+import CatHierarchy from '@/Components/Admin/CatHierarchy';
 import { usePage } from '@inertiajs/inertia-react';
-import FlashMessage from '@/Components/FlashMessage';
+import FlashMessage from '@/Components/Admin/FlashMessage';
 
 const Categories = ({ categories }) => {
     const { flash } = usePage().props;
@@ -43,6 +43,7 @@ const Categories = ({ categories }) => {
                                     <ATh>Slug</ATh>
                                     <ATh>Parent</ATh>
                                     <ATh>Postagens</ATh>
+                                    <ATh>Ativa</ATh>
                                     <ATh></ATh>
                                 </ATr>
                                 <CatHierarchy data={categories} catid={null} />

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -20,17 +22,22 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->get('q');
 
-        $query = User::orderBy('id', 'desc');
+        if (Auth::user()->role === 1) {
+            $query = User::where('id', Auth::user()->id);
+        } else {
+            $search = $request->get('q');
 
-        if ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query = User::orderBy('id', 'desc');
+
+            if ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            }
         }
-
         $users = $query->paginate(10);
 
         return Inertia::render('Admin/Users/index', ['users' => $users]);
+
     }
 
     /**
@@ -40,7 +47,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Users/adUser');
+        
+        if(Auth::user()->role === 1 ) {
+            return Redirect::route('users.index');
+        }else{
+            return Inertia::render('Admin/Users/adUser');
+        }
+       
     }
 
     /**
@@ -62,8 +75,8 @@ class UserController extends Controller
             [
                 'name' => 'required',
                 'username' => 'required',
-                'email' => 'required|email',
-                'password' => 'required|confirmed',
+                'email' => 'required|email|unique:' . User::class,
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'password_confirmation' => 'required'
             ],
             $messages,
@@ -75,7 +88,12 @@ class UserController extends Controller
             ]
         );
 
+        if ($request->hasfile('avatar')) {
+            $fileName = time() . '.' . $request->avatar->extension();
+            $request->avatar->move(public_path('uploads'), $fileName);
+        }
         $data['password'] = Hash::make($request->password);
+        $data['avatar'] = $request->hasfile('avatar') ? $fileName : Null;
         User::create($data);
         Session::flash('success', 'Usuário criado com sucesso!');
         return redirect()->route('users.index');
@@ -134,8 +152,15 @@ class UserController extends Controller
                 'password_confirmation' => 'repita a senha'
             ]
         );
-
-        $data['password'] = Hash::make($request->password);
+        if ($request->hasfile('avatar')) {
+            $fileName = time() . '.' . $request->avatar->extension();
+            $request->avatar->move(public_path('uploads'), $fileName);
+            if ($user->avatar && file_exists(public_path('uploads') . DIRECTORY_SEPARATOR . $user->avatar)) {
+                unlink(public_path('uploads') . DIRECTORY_SEPARATOR . $user->avatar);
+            }
+        }
+        $data['password'] = $request->password ? Hash::make($request->password) : $user->password;
+        $data['avatar'] = $request->hasfile('avatar') ? $fileName : $user->avatar;
         $user->update($data);
         Session::flash('success', 'Usuário editado com sucesso!');
         return redirect()->route('users.show', ['user' => $user]);
@@ -149,6 +174,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+
+        if ($user->avatar && file_exists(public_path('uploads') . DIRECTORY_SEPARATOR . $user->avatar)) {
+            unlink(public_path('uploads') . DIRECTORY_SEPARATOR . $user->avatar);
+        }
         $user->delete($user);
         Session::flash('success', 'Usuário deletado com sucesso!');
         return Redirect::route('users.index');

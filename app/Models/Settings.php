@@ -15,6 +15,7 @@ class Settings extends Model
         'logo',
         'address',
         'maps',
-        'contacts'
+        'contacts',
+        'copy'
     ];
 }
