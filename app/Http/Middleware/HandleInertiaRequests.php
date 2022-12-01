@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
+use App\Models\Post;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -47,7 +49,17 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
-            'settings' => Settings::first()
+            'settings' => fn () => Settings::first()
+                ? Settings::orderByDesc('id')->first(['id', 'title', 'logo'])
+                : '',
+
+                'categories' => fn () => Category::get()
+                ? Category::with('subCategories')->get()
+                : '',
+
+            'pages' => fn () => Post::get()
+                ? Post::where('type', 0)->orderByDesc('title')->get()
+                : '',
            
         ]);
     }

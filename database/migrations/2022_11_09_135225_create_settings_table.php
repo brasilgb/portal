@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('maps')->nullable();
             $table->text('contacts')->nullable();
-            $table->text('copy')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

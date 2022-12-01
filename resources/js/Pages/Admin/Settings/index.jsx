@@ -11,26 +11,24 @@ const Settings = ({ setting }) => {
     const { flash } = usePage().props;
 
     const { data, setData } = useForm({
-        title: setting.title,
-        description: setting.description,
         logo: null,
-        address: setting.address,
-        maps: setting.maps,
-        contacts: setting.contacts,
-        copy: setting.copy
+        title: setting?.title ? setting?.title : '',
+        description: setting?.description ? setting?.description : '',
+        address: setting?.address ? setting?.address : '',
+        maps: setting?.maps ? setting?.maps : '',
+        contacts: setting?.contacts ? setting?.contacts : ''
     });
 
     function submit(e) {
         e.preventDefault();
-        Inertia.post(route('settings.update', setting.id), {
+        Inertia.post(route('settings.update', setting?.id), {
             _method: 'put',
+            logo: data.logo,
             title: data.title,
             description: data.description,
-            logo: data.logo,
             address: data.address,
             maps: data.maps,
-            contacts: data.contacts,
-            copy: data.copy
+            contacts: data.contacts
         });
 
     }
@@ -60,7 +58,7 @@ const Settings = ({ setting }) => {
                             <div className="grid grid-cols-1 gap-6 mt-4">
 
                                 <div>
-                                    <img className='w-48 h-48 mx-2 rounded-full bg-gray-100' src={`/uploads/${setting.logo ? setting.logo : 'default.png'}`} alt="" />
+                                    <img className='w-48 h-48 mx-2 rounded-full bg-gray-100' src={`/uploads/${setting?.logo ? setting?.logo : 'default.png'}`} alt="" />
                                 </div>
 
                                 <div>
@@ -90,7 +88,8 @@ const Settings = ({ setting }) => {
                                         id="description"
                                         value={data.description}
                                         onChange={(e) => setData('description', e.target.value)}
-                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                        >
                                     </textarea>
 
                                 </div>
@@ -127,17 +126,7 @@ const Settings = ({ setting }) => {
                                     </textarea>
 
                                 </div>
-                                <div>
-                                    <label className="text-gray-700" htmlFor="copy">Copyright</label>
-                                    <input
-                                        id="copy"
-                                        type="text"
-                                        value={data.copy}
-                                        onChange={(e) => setData('copy', e.target.value)}
-                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                    />
 
-                                </div>
                             </div>
 
                             <div className="flex justify-end mt-6">

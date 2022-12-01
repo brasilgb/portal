@@ -36,10 +36,10 @@ const SideBar = () => {
                         type="button"
                         href="/"
                     >
-                        <img className="w-28 h-28 mx-2 rounded-full bg-gray-100" src={`/uploads/${settings.logo ? settings.logo : 'default.png'}`} alt={settings.title} />
+                        <img className="w-28 h-28 mx-2 rounded-full bg-gray-100" src={`/uploads/${settings?.logo ? settings?.logo : 'default.png'}`} alt={settings?.title} />
                     </Link>
 
-                    <h4 className="mx-2 mt-2 font-normal text-gray-800 dark:text-gray-200 hover:underline">{settings.title}</h4>
+                    <h4 className="mx-2 mt-2 font-normal text-gray-800 dark:text-gray-200 hover:underline">{settings?.title}</h4>
                 </div>
 
                 <div className="flex flex-col justify-between flex-1 mt-6">
