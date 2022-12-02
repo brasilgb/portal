@@ -8,14 +8,14 @@ import { useForm, usePage } from '@inertiajs/inertia-react';
 import FlashMessage from '@/Components/Admin/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
 
-const EdPost = ({ post, categories }) => {
+const EdPost = ({ post, categories, postCategory }) => {
     const { flash } = usePage().props;
 
     const { data, setData, errors } = useForm({
         title: post.title,
         summary: post.summary,
         content: post.content,
-        category_id: post.category_id,
+        category_id: postCategory,
         featured: null,
         social: post.social,
         linked: post.linked,
@@ -24,16 +24,31 @@ const EdPost = ({ post, categories }) => {
 
     function submit(e) {
         e.preventDefault();
-        Inertia.post(route('posts.update', post.id), {_method: 'put',
+        Inertia.post(route('posts.update', post.id), {
+            _method: 'put',
             title: data.title,
             summary: data.summary,
             content: data.content,
-            category_id: data.category_id,
+            category_id: [],
             featured: data.featured,
             social: data.social,
             active: data.active
         });
     }
+
+    const handleChecked = (e) => {
+        let id = e.target.value;
+        if (e.target.checked) {
+            setData("category_id", [...data.category_id, id]);
+        } else {
+            setData(
+                "category_id",
+                data.category_id.filter((item) => {
+                    return item !== id;
+                })
+            );
+        }
+    };
 
     return (
         <AdminLayout title="Postagens">
@@ -106,7 +121,29 @@ const EdPost = ({ post, categories }) => {
 
                                 </div>
 
+
                                 <div>
+                                    <label className="text-gray-700" htmlFor="category_id" >Categorias</label>
+                                    <div className="grid grid-cols-6 gap-4 border rounded-md p-2 bg-gray-50">
+                                        {categories.map((category, index) => (
+
+                                            <div key={index} className="p-2 border rounded-md bg-yellow-50">
+                                                <input
+                                                    type="checkbox"
+                                                    name="category_id[]"
+                                                    id={`category${category.id}`}
+                                                    // checked={2}
+                                                    value={category.id}
+                                                    onChange={(e) => handleChecked(e)}
+                                                    className="p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                                />
+                                                <span className="mx-1">{category.name}</span>
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                </div>
+                                {/* <div>
                                     <label className="text-gray-700" htmlFor="category_id" >Categoria</label>
                                     <select
                                         name="category_id"
@@ -120,44 +157,44 @@ const EdPost = ({ post, categories }) => {
                                             <option key={indexCategory} value={category.id}>{category.name}</option>
                                         ))}
                                     </select>
+                                </div> */}
+
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="active"
+                                        checked={data.active}
+                                        onChange={(e) => setData('active', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="active">Ativar página</label>
+                                    {errors.active && <div className="text-red-500">{errors.active}</div>}
                                 </div>
 
-                            <div className="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="active"
-                                    checked={data.active}
-                                    onChange={(e) => setData('active', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="active">Ativar página</label>
-                                {errors.active && <div className="text-red-500">{errors.active}</div>}
-                            </div>
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="social"
+                                        checked={data.social}
+                                        onChange={(e) => setData('social', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
+                                    {errors.social && <div className="text-red-500">{errors.social}</div>}
+                                </div>
 
-                            <div className="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="social"
-                                    checked={data.social}
-                                    onChange={(e) => setData('social', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="social">Botões redes sociais</label>
-                                {errors.social && <div className="text-red-500">{errors.social}</div>}
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="linked"
+                                        checked={data.linked}
+                                        onChange={(e) => setData('linked', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
+                                    {errors.linked && <div className="text-red-500">{errors.linked}</div>}
+                                </div>
                             </div>
-
-                            <div className="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="linked"
-                                    checked={data.linked}
-                                    onChange={(e) => setData('linked', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="linked">Abrir em outra página</label>
-                                {errors.linked && <div className="text-red-500">{errors.linked}</div>}
-                            </div>
-                            </div>                            
                             <div className="flex justify-end mt-6">
                                 <ButtonSave />
                             </div>

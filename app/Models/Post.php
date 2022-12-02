@@ -10,7 +10,6 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
         'title', //título da postagem ou página
         'slug',
         'summary', //resumo de conteúdo
@@ -21,9 +20,10 @@ class Post extends Model
         'type', //Caso seja página ou post. 0=página 1=postagem
         'linked' //Adiciona link caso seja postagem. 0=remove 1=adiciona
     ];
-    
-    public function categories() {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
-    
+
 }

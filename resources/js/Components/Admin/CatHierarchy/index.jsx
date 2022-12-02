@@ -18,7 +18,7 @@ const CatHierarchy = ({ data, catid }) => {
                             <ATd>
                                 {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                             </ATd>
-                            <ATd>{category.postagens.length}</ATd>
+                            <ATd>{category.posts.length}</ATd>
                             <ATd>
                                 <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
                                     {category.active
@@ -49,7 +49,7 @@ const CatHierarchy = ({ data, catid }) => {
                                         <ATd>
                                             {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                         </ATd>
-                                        <ATd>{category.postagens.length}</ATd>
+                                        <ATd>{category.posts.length}</ATd>
                                         <ATd>
                                             <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
                                                 {category.active
@@ -80,7 +80,7 @@ const CatHierarchy = ({ data, catid }) => {
                                                     <ATd>
                                                         {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                     </ATd>
-                                                    <ATd>{category.postagens.length}</ATd>
+                                                    <ATd>{category.posts.length}</ATd>
                                                     <ATd>
                                                         <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
                                                             {category.active
@@ -111,7 +111,7 @@ const CatHierarchy = ({ data, catid }) => {
                                                                 <ATd>
                                                                     {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                                 </ATd>
-                                                                <ATd>{category.postagens.length}</ATd>
+                                                                <ATd>{category.posts.length}</ATd>
                                                                 <ATd>
                                                                     <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
                                                                         {category.active
@@ -142,7 +142,7 @@ const CatHierarchy = ({ data, catid }) => {
                                                                             <ATd>
                                                                                 {data.data.filter((c) => (c.id === category.parent)).map((ct) => ct.name)}
                                                                             </ATd>
-                                                                            <ATd>{category.postagens.length}</ATd>
+                                                                            <ATd>{category.posts.length}</ATd>
                                                                             <ATd>
                                                                                 <IconContext.Provider value={{ className: `text-2xl ${category.active ? 'text-green-600' : 'text-red-500'}` }}>
                                                                                     {category.active

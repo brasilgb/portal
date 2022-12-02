@@ -14,9 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->id(); 
             $table->string('title');
             $table->string('slug');
             $table->text('summary');
@@ -27,7 +25,7 @@ return new class extends Migration
             $table->integer('type');
             $table->integer('linked')->nullable();
             $table->timestamp('created_at')->useCurrent();
-$table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

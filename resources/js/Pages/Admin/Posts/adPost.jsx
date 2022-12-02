@@ -6,12 +6,14 @@ import { ButtonNew, ButtonSave } from '@/Components/Admin/Buttons';
 import { FormSearch } from '@/Components/Admin/Form';
 import { useForm } from '@inertiajs/inertia-react';
 
+
 const AdPost = ({ categories }) => {
 
     const { data, setData, post, progress, errors } = useForm({
         title: '',
         summary: '',
         content: '',
+        category_id: [],
         featured: null,
         active: 1,
         social: 0,
@@ -23,6 +25,20 @@ const AdPost = ({ categories }) => {
         e.preventDefault();
         post(route('posts.store'));
     }
+
+    const handleChecked = (e) => {
+        let id = e.target.value;
+        if (e.target.checked) {
+            setData("category_id", [...data.category_id, id]);
+        } else {
+            setData(
+                "category_id",
+                data.category_id.filter((item) => {
+                    return item !== id;
+                })
+            );
+        }
+    };
 
     return (
         <AdminLayout title="Postagens">
@@ -96,8 +112,25 @@ const AdPost = ({ categories }) => {
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="category_id" >Categoria</label>
-                                    <select
+                                    <label className="text-gray-700" htmlFor="category_id" >Categorias</label>
+                                    <div className="grid grid-cols-6 gap-4 border rounded-md p-2 bg-gray-50">
+                                        {categories.map((category, index) => (
+
+                                            <div key={index} className="p-2 border rounded-md bg-yellow-50">
+                                                <input
+                                                    type="checkbox"
+                                                    name="category_id[]"
+                                                    id={`category${category.id}`}
+                                                    value={category.id}
+                                                    onChange={(e) => handleChecked(e)}
+                                                    className="p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                                />
+                                                <span className="mx-1">{category.name}</span>
+                                            </div>
+                                        ))}
+                                        
+                                    </div>
+                                    {/* <select
                                         name="category_id"
                                         id="category_id"
                                         value={data.category_id}
@@ -108,7 +141,7 @@ const AdPost = ({ categories }) => {
                                         {categories.map((category, indexCategory) => (
                                             <option key={indexCategory} value={category.id}>{category.name}</option>
                                         ))}
-                                    </select>
+                                    </select> */}
                                     {errors.category_id && <div className="text-red-500">{errors.category_id}</div>}
                                 </div>
 

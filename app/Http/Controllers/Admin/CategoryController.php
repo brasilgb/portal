@@ -21,7 +21,7 @@ class CategoryController extends Controller
     {
         $search = $request->get('q');
 
-        $query = Category::with('postagens')->orderBy('id', 'desc');
+        $query = Category::with('posts')->orderBy('id', 'desc');
 
         if($search) {
             $query->where('name', 'like', '%'. $search .'%');

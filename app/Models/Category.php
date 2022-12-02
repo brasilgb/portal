@@ -20,8 +20,8 @@ class Category extends Model
         'parent'
     ];
 
-    public function postagens() {
-        return $this->hasMany(Post::class, 'category_id');
+    public function posts() {
+        return $this->belongsToMany(Post::class);
     }
 
     public function subCategories()

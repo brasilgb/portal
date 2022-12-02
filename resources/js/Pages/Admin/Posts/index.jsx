@@ -42,7 +42,7 @@ const Posts = ({ posts }) => {
                                     <ATh>Title</ATh>
                                     <ATh>Slug</ATh>
                                     <ATh>Resumo</ATh>
-                                    <ATh>Categoria</ATh>
+                                    <ATh>Categorias</ATh>
                                     <ATh>Ativo</ATh>
                                     <ATh></ATh>
                                 </ATr>
@@ -55,7 +55,9 @@ const Posts = ({ posts }) => {
                                             <ATd>
                                                 {post.summary}
                                             </ATd>
-                                            <ATd>{post.categories.name}</ATd>
+                                            <ATd>{post.categories.map((c,i) => (
+                                                <span key={i} className="p-2 mx-1 bg-yellow-100 rounded-md border ">{ c.name }</span>
+                                            ))}</ATd>
                                             <ATd>
                                                 <IconContext.Provider value={{ className: `text-2xl ${post.active ? 'text-green-600' : 'text-red-500'}` }}>
                                                     {post.active
