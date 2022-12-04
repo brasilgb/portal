@@ -16,6 +16,7 @@ class Authenticate extends Middleware
     {
 
         if (! $request->expectsJson()) {
+            
             if(User::get()->count() > 0){
                 return route('login');
             }else{

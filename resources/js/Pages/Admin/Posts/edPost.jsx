@@ -10,12 +10,12 @@ import { Inertia } from '@inertiajs/inertia';
 
 const EdPost = ({ post, categories, postCategory }) => {
     const { flash } = usePage().props;
-
+console.log(postCategory.map((m) => (m.id)));
     const { data, setData, errors } = useForm({
         title: post.title,
         summary: post.summary,
         content: post.content,
-        category_id: postCategory,
+        category_id: postCategory.map((m) => (m.id)),
         featured: null,
         social: post.social,
         linked: post.linked,
@@ -120,7 +120,7 @@ const EdPost = ({ post, categories, postCategory }) => {
                                     />
 
                                 </div>
-
+                               
 
                                 <div>
                                     <label className="text-gray-700" htmlFor="category_id" >Categorias</label>
@@ -132,11 +132,10 @@ const EdPost = ({ post, categories, postCategory }) => {
                                                     type="checkbox"
                                                     name="category_id[]"
                                                     id={`category${category.id}`}
-                                                    // checked={2}
                                                     value={category.id}
                                                     onChange={(e) => handleChecked(e)}
                                                     className="p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                                />
+                                                 />
                                                 <span className="mx-1">{category.name}</span>
                                             </div>
                                         ))}
