@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('parent')->unsigned()->nullable()->default(null);
+            $table->foreign('parent')->references('id')->on('categories')->onUpdate('cascade')->onDelete('set null');
+            $table->integer('order');
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
             $table->integer('active');
-            $table->integer('parent')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

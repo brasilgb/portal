@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoDocumentTextOutline, IoArrowBackOutline } from 'react-icons/io5';
@@ -7,15 +7,19 @@ import { FormSearch } from '@/Components/Admin/Form';
 import { useForm, usePage } from '@inertiajs/inertia-react';
 import FlashMessage from '@/Components/Admin/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
+import Select from 'react-select';
 
-const EdPost = ({ post, categories, postCategory }) => {
+const EdPost = ({ reset, post, categories, postCategory }) => {
     const { flash } = usePage().props;
-console.log(postCategory.map((m) => (m.id)));
+
+    const categoryDefault = postCategory.map((cat) => ({value: cat.id, label: cat.name}));
+    const options = categories.map((cat) => ({ value: cat.id, label: cat.name }))
     const { data, setData, errors } = useForm({
         title: post.title,
         summary: post.summary,
         content: post.content,
-        category_id: postCategory.map((m) => (m.id)),
+        category_id: categories,
+        featured: null,
         featured: null,
         social: post.social,
         linked: post.linked,
@@ -29,25 +33,16 @@ console.log(postCategory.map((m) => (m.id)));
             title: data.title,
             summary: data.summary,
             content: data.content,
-            category_id: [],
+            category_id: data.category_id,
             featured: data.featured,
             social: data.social,
             active: data.active
         });
     }
 
-    const handleChecked = (e) => {
-        let id = e.target.value;
-        if (e.target.checked) {
-            setData("category_id", [...data.category_id, id]);
-        } else {
-            setData(
-                "category_id",
-                data.category_id.filter((item) => {
-                    return item !== id;
-                })
-            );
-        }
+    const handleChange = (selected) => {
+        console.log(selected);
+        setData('category_id', selected.map((v) => (v.value)));
     };
 
     return (
@@ -124,39 +119,13 @@ console.log(postCategory.map((m) => (m.id)));
 
                                 <div>
                                     <label className="text-gray-700" htmlFor="category_id" >Categorias</label>
-                                    <div className="grid grid-cols-6 gap-4 border rounded-md p-2 bg-gray-50">
-                                        {categories.map((category, index) => (
-
-                                            <div key={index} className="p-2 border rounded-md bg-yellow-50">
-                                                <input
-                                                    type="checkbox"
-                                                    name="category_id[]"
-                                                    id={`category${category.id}`}
-                                                    value={category.id}
-                                                    onChange={(e) => handleChecked(e)}
-                                                    className="p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                                 />
-                                                <span className="mx-1">{category.name}</span>
-                                            </div>
-                                        ))}
-
-                                    </div>
+                                    <Select 
+                                        options={options}
+                                        isMulti
+                                        defaultValue={categoryDefault}
+                                        onChange={handleChange}
+                                    />
                                 </div>
-                                {/* <div>
-                                    <label className="text-gray-700" htmlFor="category_id" >Categoria</label>
-                                    <select
-                                        name="category_id"
-                                        id="category_id"
-                                        value={data.category_id}
-                                        onChange={(e) => setData('category_id', e.target.value)}
-                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                    >
-                                        <option value="0">Selecione uma categoria</option>
-                                        {categories.map((category, indexCategory) => (
-                                            <option key={indexCategory} value={category.id}>{category.name}</option>
-                                        ))}
-                                    </select>
-                                </div> */}
 
                                 <div className="flex items-center">
                                     <input
