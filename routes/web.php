@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -32,5 +33,6 @@ Route::resource('/admin/posts', PostController::class);
 Route::resource('/admin/pages', PageController::class);
 Route::resource('/admin/settings', SettingsController::class);
 Route::resource('/admin/users', UserController::class);
+Route::resource('/admin/sections', SectionController::class);
 
 require __DIR__.'/auth.php';

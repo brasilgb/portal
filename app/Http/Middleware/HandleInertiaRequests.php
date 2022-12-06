@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Settings;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -50,17 +51,18 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'settings' => fn () => Settings::first()
-                ? Settings::orderByDesc('id')->first(['id', 'title', 'description','logo'])
+                ? Settings::orderByDesc('id')->first(['id', 'title', 'description', 'logo'])
                 : '',
 
-                'categories' => fn () => Category::get()
+            'categories' => fn () => Category::get()
                 ? Category::with('subCategories')->get()
                 : '',
 
-            'pages' => fn () => Post::get()
+                'pages' => fn () => Post::get()
                 ? Post::where('type', 0)->orderByDesc('title')->get()
                 : '',
-           
+                'userRegistered' => User::get()->count()
+
         ]);
     }
 }

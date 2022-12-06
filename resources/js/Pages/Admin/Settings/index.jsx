@@ -10,7 +10,7 @@ import { Inertia } from '@inertiajs/inertia';
 const Settings = ({ setting }) => {
     const { flash } = usePage().props;
 
-    const { data, setData } = useForm({
+    const { data, setData, processing } = useForm({
         logo: null,
         title: setting?.title ? setting?.title : '',
         description: setting?.description ? setting?.description : '',
@@ -130,7 +130,7 @@ const Settings = ({ setting }) => {
                             </div>
 
                             <div className="flex justify-end mt-6">
-                                <ButtonSave />
+                                <ButtonSave processing={processing} />
                             </div>
                         </form>
 

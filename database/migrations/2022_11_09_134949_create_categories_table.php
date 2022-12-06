@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('parent')->unsigned()->nullable()->default(null);
             $table->foreign('parent')->references('id')->on('categories')->onUpdate('cascade')->onDelete('set null');
-            $table->integer('order');
+            $table->integer('order')->nullable();
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
