@@ -9,8 +9,8 @@ import FlashMessage from '@/Components/Admin/FlashMessage';
 
 const edCategory = ({ category, parent }) => {
     const { flash } = usePage().props;
-    console.log(flash);
-    const { data, setData, put, errors } = useForm({
+
+    const { data, setData, put, processing, errors } = useForm({
         name: category.name,
         description: category.description,
         parent: category.parent,
@@ -99,7 +99,7 @@ const edCategory = ({ category, parent }) => {
                             </div>
 
                             <div className="flex justify-end mt-6">
-                                <ButtonSave />
+                                <ButtonSave processing={processing} />
                             </div>
                         </form>
 

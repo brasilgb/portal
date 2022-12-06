@@ -11,7 +11,7 @@ import { Inertia } from '@inertiajs/inertia';
 const EdPage = ({ page }) => {
     const { flash } = usePage().props;
 
-    const { data, setData, errors } = useForm({
+    const { data, setData, processing, errors } = useForm({
         title: page.title,
         summary: page.summary,
         content: page.content,
@@ -141,7 +141,7 @@ const EdPage = ({ page }) => {
                                 </div>
                             </div>
                             <div className="flex justify-end mt-6">
-                                <ButtonSave />
+                                <ButtonSave processing={processing} />
                             </div>
                         </form>
 

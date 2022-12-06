@@ -9,17 +9,16 @@ import FlashMessage from '@/Components/Admin/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
 import Select from 'react-select';
 
-const EdPost = ({ reset, post, categories, postCategory }) => {
+const EdPost = ({ post, categories, processing, postCategory }) => {
     const { flash } = usePage().props;
 
-    const categoryDefault = postCategory.map((cat) => ({value: cat.id, label: cat.name}));
-    const options = categories.map((cat) => ({ value: cat.id, label: cat.name }))
+    const categoryDefault = postCategory.map((cat) => ({ value: cat.id, label: cat.name }));
+    const options = categories.map((cat) => ({ value: cat.id, label: cat.name }));
+
     const { data, setData, errors } = useForm({
         title: post.title,
         summary: post.summary,
         content: post.content,
-        category_id: categories,
-        featured: null,
         featured: null,
         social: post.social,
         linked: post.linked,
@@ -33,15 +32,14 @@ const EdPost = ({ reset, post, categories, postCategory }) => {
             title: data.title,
             summary: data.summary,
             content: data.content,
-            category_id: data.category_id,
             featured: data.featured,
             social: data.social,
-            active: data.active
+            active: data.active,
+            category_id: data.category_id ? data.category_id : null
         });
     }
 
     const handleChange = (selected) => {
-        console.log(selected);
         setData('category_id', selected.map((v) => (v.value)));
     };
 
@@ -115,15 +113,23 @@ const EdPost = ({ reset, post, categories, postCategory }) => {
                                     />
 
                                 </div>
-                               
+
 
                                 <div>
                                     <label className="text-gray-700" htmlFor="category_id" >Categorias</label>
-                                    <Select 
+                                    <Select
                                         options={options}
                                         isMulti
                                         defaultValue={categoryDefault}
                                         onChange={handleChange}
+                                        placeholder="Selecione a(s) categoria(s)"
+                                        styles={{
+                                            multiValueLabel: (base) => ({
+                                                ...base,
+                                                backgroundColor: '#00AEEF',
+                                                color: 'white'
+                                            }),
+                                        }}
                                     />
                                 </div>
 
@@ -164,7 +170,7 @@ const EdPost = ({ reset, post, categories, postCategory }) => {
                                 </div>
                             </div>
                             <div className="flex justify-end mt-6">
-                                <ButtonSave />
+                                <ButtonSave processing={processing} />
                             </div>
                         </form>
 

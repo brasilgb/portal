@@ -12,7 +12,7 @@ const AdPost = ({ categories }) => {
 
     const options = categories.map((cat) => ({ value: cat.id, label: cat.name }))
 
-    const { data, setData, post, progress, errors } = useForm({
+    const { data, setData, post, progress, processing, errors } = useForm({
         title: '',
         summary: '',
         content: '',
@@ -26,12 +26,10 @@ const AdPost = ({ categories }) => {
 
     function submit(e) {
         e.preventDefault();
-        console.log(data);
         post(route('posts.store'));
     }
 
     const handleChange = (selected) => {
-        console.log(selected.value);
         setData('category_id', selected.map((v) => (v.value)));
     };
 
@@ -112,6 +110,14 @@ const AdPost = ({ categories }) => {
                                         options={options}
                                         isMulti
                                         onChange={handleChange}
+                                        placeholder="Selecione a(s) categoria(s)"
+                                        styles={{
+                                            multiValueLabel: (base) => ({
+                                              ...base,
+                                              backgroundColor: '#00AEEF',
+                                              color: 'white'
+                                            }),
+                                          }}
                                     />
                                     {errors.category_id && <div className="text-red-500">{errors.category_id}</div>}
                                 </div>
@@ -139,7 +145,7 @@ const AdPost = ({ categories }) => {
                                 </div>
                             </div>
                             <div className="flex justify-end mt-6">
-                                <ButtonSave />
+                                <ButtonSave  processing={processing} />
                             </div>
                         </form>
 

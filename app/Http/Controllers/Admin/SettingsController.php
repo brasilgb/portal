@@ -77,7 +77,7 @@ class SettingsController extends Controller
      */
     public function update(Request $request, Settings $settings)
     {
-// dd($settings);
+
         if ($request->hasfile('logo')) {
             $fileName = time() . '.' . $request->logo->extension();
             $request->logo->move(public_path('uploads'), $fileName);
@@ -93,8 +93,7 @@ class SettingsController extends Controller
             'logo' => $request->hasfile('logo') ? $fileName : $settings->first()->logo,
             'address' => $request->address,
             'maps' => $request->maps,
-            'contacts' => $request->contacts,
-            'copy' => $request->copy
+            'contacts' => $request->contacts
         ]);
         Session::flash('success', 'Configuracões editadas com sucesso!');
         return Redirect::route('settings.index');

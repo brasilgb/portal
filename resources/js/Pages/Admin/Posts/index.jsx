@@ -55,9 +55,13 @@ const Posts = ({ posts }) => {
                                             <ATd>
                                                 {post.summary}
                                             </ATd>
-                                            <ATd>{post.categories.map((c,i) => (
-                                                <span key={i} className="p-2 mx-1 bg-yellow-100 rounded-md border ">{ c.name }</span>
-                                            ))}</ATd>
+                                            <ATd>
+                                                <div className="grid grid-cols-2 gap-1">
+                                                {post.categories.map((c, i) => (
+                                                    <span key={i} className="px-2 py-1 bg-yellow-100 rounded-md border ">{c.name}</span>
+                                                ))}
+                                                </div>
+                                            </ATd>
                                             <ATd>
                                                 <IconContext.Provider value={{ className: `text-2xl ${post.active ? 'text-green-600' : 'text-red-500'}` }}>
                                                     {post.active

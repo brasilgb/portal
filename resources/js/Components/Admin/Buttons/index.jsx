@@ -24,7 +24,7 @@ export const ButtonNew = ({ url, icon, value }) => {
     )
 }
 
-export const ButtonSave = () => {
+export const ButtonSave = ({ processing }) => {
 
     return (
         <Fragment>
@@ -32,6 +32,7 @@ export const ButtonSave = () => {
             <button
                 type="submit"
                 className="flex items-center py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md shadow-md"
+                disabled={processing}
             >
                 <IconContext.Provider value={{ className: "text-xl text-gray-50 text-white " }}>
                     <IoSaveOutline />

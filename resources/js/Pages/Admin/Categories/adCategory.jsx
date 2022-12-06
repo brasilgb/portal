@@ -10,7 +10,7 @@ import FlashMessage from '@/Components/Admin/FlashMessage';
 const AdCategory = ({ categories }) => {
     const { flash } = usePage().props;
 
-    const { data, setData, post, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: '',
         description: '',
         parent: '',
@@ -86,7 +86,7 @@ const AdCategory = ({ categories }) => {
                             </div>
 
                             <div className="flex justify-end mt-6">
-                                <ButtonSave />
+                                <ButtonSave processing={processing} />
                             </div>
                         </form>
 

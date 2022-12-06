@@ -50,7 +50,7 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'settings' => fn () => Settings::first()
-                ? Settings::orderByDesc('id')->first(['id', 'title', 'logo'])
+                ? Settings::orderByDesc('id')->first(['id', 'title', 'description','logo'])
                 : '',
 
                 'categories' => fn () => Category::get()

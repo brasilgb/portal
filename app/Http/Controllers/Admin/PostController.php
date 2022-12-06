@@ -86,9 +86,7 @@ class PostController extends Controller
         Post::create($data);
 
         $post = Post::orderByDesc('id')->first();
-        foreach ($request->category_id as $key => $value) {
-            $post->categories()->attach(['category_id' => $value]);
-        };
+        $post->categories()->attach($request->category_id);
 
         Session::flash('success', 'Postagem criada com sucesso!');
         return redirect()->route('posts.index');
@@ -104,7 +102,7 @@ class PostController extends Controller
     {
 
         $categories = Category::get();
-        
+
         return Inertia::render('Admin/Posts/edPost', ['categories' => $categories, 'post' => $post, 'postCategory' => $post->categories]);
     }
 
@@ -160,15 +158,12 @@ class PostController extends Controller
 
         $data['slug'] = Str::slug($request->title);
         $data['featured'] = $request->hasfile('featured') ? $fileName : $post->featured;
-
         $post->update($data);
 
-        $post = Post::find($post->id);
-        $post->categories()->detach();
-        foreach ($request->category_id as $key => $value) {
-                $post->categories()->attach(['category_id' => $value]);
-        };
-
+        if ($request->category_id != null) {
+            $posta = Post::find($post->id);
+            $posta->categories()->sync($request->category_id);
+        }
 
         Session::flash('success', 'Postagem editada com sucesso!');
         return Redirect::route('posts.show', ['post' => $post->id]);
@@ -185,9 +180,9 @@ class PostController extends Controller
         if (public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured) {
             unlink(public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured);
         }
-              $post->categories()->detach(); 
+        $post->categories()->detach();
         $post->delete($post);
- 
+
         Session::flash('success', 'Postagem deletada com sucesso!');
         return Redirect::route('posts.index');
     }

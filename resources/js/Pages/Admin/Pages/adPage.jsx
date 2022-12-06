@@ -8,7 +8,7 @@ import { useForm } from '@inertiajs/inertia-react';
 
 const AdPage = () => {
 
-    const { data, setData, post, progress, errors } = useForm({
+    const { data, setData, post, progress, processing, errors } = useForm({
         title: '',
         summary: '',
         content: '',
@@ -119,7 +119,7 @@ const AdPage = () => {
                             </div>
 
                             <div className="flex justify-end mt-6">
-                                <ButtonSave />
+                                <ButtonSave processing={processing} />
                             </div>
                         </form>
 
