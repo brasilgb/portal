@@ -85,17 +85,18 @@ const edCategory = ({ category, parent }) => {
                                         ))}
                                     </select>
                                 </div>
-                            </div>
 
-                            <div className="flex items-center mt-2">
-                                <input
-                                    type="checkbox"
-                                    id="active"
-                                    checked={data.active}
-                                    onChange={(e) => setData('active', e.target.checked)}
-                                    className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                                />
-                                <label className="text-gray-700" htmlFor="active">{category.active ? 'Desativar' : 'Ativar'}</label>
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="active"
+                                        checked={data.active}
+                                        onChange={(e) => setData('active', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="active">{category.active ? 'Desativar' : 'Ativar'} em menus</label>
+                                </div>
+
                             </div>
 
                             <div className="flex justify-end mt-6">

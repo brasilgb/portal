@@ -20,7 +20,8 @@ return new class extends Migration
             $table->integer('section3')->nullable();
             $table->integer('section4')->nullable();
             $table->integer('section5')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

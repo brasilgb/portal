@@ -14,7 +14,7 @@ const AdCategory = ({ categories }) => {
         name: '',
         description: '',
         parent: '',
-        active: '1'
+        active: false
     });
 
     function submit(e) {
@@ -83,6 +83,19 @@ const AdCategory = ({ categories }) => {
                                         ))}
                                     </select>
                                 </div>
+                                
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="active"
+                                        checked={data.active}
+                                        value={data.active}
+                                        onChange={(e) => setData('active', e.target.checked)}
+                                        className="block mr-2 p-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                                    />
+                                    <label className="text-gray-700" htmlFor="active">Ativar em menus</label>
+                                </div>
+
                             </div>
 
                             <div className="flex justify-end mt-6">

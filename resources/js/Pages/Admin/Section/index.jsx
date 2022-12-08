@@ -15,22 +15,23 @@ const Section = ({ categories, section }) => {
     const options = categories.map((cat) => ({ value: cat.id, label: cat.name }));
 
     const { data, setData, processing } = useForm({
-        section1: section.section1,
-        section2: section.section2,
-        section3: section.section3,
-        section4: section.section4,
-        section5: section.section5
+        section1: section?.section1 ? section?.section1 : '',
+        section2: section?.section2 ? section?.section2 : '',
+        section3: section?.section3 ? section?.section3 : '',
+        section4: section?.section4 ? section?.section4 : '',
+        section5: section?.section5 ? section?.section5 : ''
     });
 
     function submit(e) {
         e.preventDefault();
+
         Inertia.post(route('sections.update', section?.id), {
             _method: 'put',
-            section1: data.section1['value'],
-            section2: data.section2['value'],
-            section3: data.section3['value'],
-            section4: data.section4['value'],
-            section5: data.section5['value']
+            section1: data?.section1['value'],
+            section2: data?.section2['value'],
+            section3: data?.section3['value'],
+            section4: data?.section4['value'],
+            section5: data?.section5['value']
         });
     }
 
@@ -59,7 +60,7 @@ const Section = ({ categories, section }) => {
                             <div className="grid grid-cols-1 gap-6 mt-4">
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="description">Secção 1</label>
+                                    <label className="text-gray-700" htmlFor="description">Secção 1 ( Slide Topo )</label>
                                     <Select
                                         options={options}
                                         defaultValue={options.filter((o) => o.value === data.section1)}

@@ -4,17 +4,26 @@ import SiteLayout from '@/Layouts/SiteLayout';
 import { Head } from '@inertiajs/inertia-react';
 import React, { Fragment } from 'react'
 
-const Home = () => {
+const Home = ({ sections, categories }) => {
+  // console.log(sections.section1);
   return (
     <SiteLayout>
       <Head title="Home" />
+      {categories
+        .filter((s) => (s.id === sections.section1))
+        .map((category) => (
+          
+          <BannerTop padAll={'md:py-0 py-10'} bgImage={category.posts[0].featured}>
+            <div className="md:container mx-auto ">
+              <div className="flex items-center flex-col justify-center h-[25rem] bg-blue-800 bg-opacity-60">
+                <h1 className="font-bold text-6xl text-white">{category.posts[0].title}</h1>
+                <p className="font-semibold text-xl text-white pt-10 text-center px-20">
+                  {category.posts[0].summary}</p>
+              </div>
 
-      <BannerTop padAll={'md:py-36 py-10'}>
-        <div className="md:container mx-auto flex flex-col items-center">
-          <h1 className="font-bold text-6xl text-white">Grupo Solar - Portal LGPD</h1>
-          <p className="font-semibold text-xl text-white pt-10 text-center px-20">Nosso compromisso, além de oferecer um excelente serviço é cuidar muito bem dos dados pessoais de nossos clientes, o sigilo pessoal das informações está garantido. Estamos adequados com a LGPD.</p>
-        </div>
-      </BannerTop>
+            </div>
+          </BannerTop>
+        ))}
 
       <Section bgSection="bg-white">
         section

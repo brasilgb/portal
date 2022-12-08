@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Meta;
 use App\Models\Category;
 use App\Models\Section;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -13,12 +15,17 @@ use Inertia\Inertia;
 class SectionController extends Controller
 {
     public function index()
-    {
-        if (Section::get()->isEmpty()) {
-            Section::create(['title' => '']);
-        }
+    {        
+        $settings = Settings::first();
+        Meta::addMeta('title', $settings ? $settings->title : '...');
+        Meta::addMeta('description', $settings ? $settings->metadescription : '...');
+        
+        if (!Section::count()) :
+            Section::create(['section1' => null]);
+        endif;
         $section = Section::first();
         $categories = Category::get();
+
         return Inertia::render('Admin/Section/index', [ 'categories' => $categories, 'section' => $section]);
     }
 

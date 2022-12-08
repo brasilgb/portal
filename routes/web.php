@@ -2,16 +2,18 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
+// Rotas Admin
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\HomeController as AdminHome;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
 
+// Rotas Site
+use App\Http\Controllers\Site\HomeController as SiteHome;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +25,9 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Site/Home/index');
-});
+Route::get('/', [SiteHome::class, 'index'])->name('home');
 
-Route::get('/admin', [HomeController::class, 'index'])->name('admin');
+Route::get('/admin', [AdminHome::class, 'index'])->name('admin');
 Route::resource('/admin/categories', CategoryController::class);
 Route::resource('/admin/posts', PostController::class);
 Route::resource('/admin/pages', PageController::class);

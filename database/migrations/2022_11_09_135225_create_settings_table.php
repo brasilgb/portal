@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('logo')->nullable();
             $table->text('address')->nullable();
+            $table->text('metadescription')->nullable();
             $table->text('maps')->nullable();
             $table->text('contacts')->nullable();
             $table->timestamp('created_at')->useCurrent();

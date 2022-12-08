@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Meta;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -17,7 +18,11 @@ class SettingsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Settings $settings, Request $request)
-    {
+    {        
+        $settings = Settings::first();
+        Meta::addMeta('title', $settings ? $settings->title : '...');
+        Meta::addMeta('description', $settings ? $settings->metadescription : '...');
+        
         if (Settings::get()->isEmpty()) {
             Settings::create(['title' => '']);
         }
@@ -90,6 +95,7 @@ class SettingsController extends Controller
         $settings->where('id', $settings->first()->id)->update([
             'title' => $request->title,
             'description' => $request->description,
+            'metadescription' => $request->metadescription,
             'logo' => $request->hasfile('logo') ? $fileName : $settings->first()->logo,
             'address' => $request->address,
             'maps' => $request->maps,

@@ -8,12 +8,14 @@ import FlashMessage from '@/Components/Admin/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
 
 const Settings = ({ setting }) => {
+    
     const { flash } = usePage().props;
 
     const { data, setData, processing } = useForm({
         logo: null,
         title: setting?.title ? setting?.title : '',
         description: setting?.description ? setting?.description : '',
+        metadescription: setting?.metadescription ? setting?.metadescription : '',
         address: setting?.address ? setting?.address : '',
         maps: setting?.maps ? setting?.maps : '',
         contacts: setting?.contacts ? setting?.contacts : ''
@@ -26,6 +28,7 @@ const Settings = ({ setting }) => {
             logo: data.logo,
             title: data.title,
             description: data.description,
+            metadescription: data.metadescription,
             address: data.address,
             maps: data.maps,
             contacts: data.contacts
@@ -117,18 +120,29 @@ const Settings = ({ setting }) => {
                                 </div>
 
                                 <div>
+                                    <label className="text-gray-700" htmlFor="metadescription">Meta Description (SEO)</label>
+                                    <textarea
+                                        rows={4}
+                                        id="metadescription"
+                                        value={data.metadescription}
+                                        onChange={(e) => setData('metadescription', e.target.value)}
+                                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                                    </textarea>
+                                </div>
+
+                                <div>
                                     <label className="text-gray-700" htmlFor="maps">Google Maps</label>
                                     <textarea
+                                        rows={4}
                                         id="maps"
                                         value={data.maps}
                                         onChange={(e) => setData('maps', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                                     </textarea>
-
                                 </div>
 
                                 {setting.maps &&
-                                
+
                                     <div className="w-full flex justify-center border shadow-md" dangerouslySetInnerHTML={{ __html: setting.maps }} />
                                 }
                             </div>

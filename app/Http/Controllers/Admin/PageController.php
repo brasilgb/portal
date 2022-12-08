@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Meta;
 use App\Models\Post;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -110,7 +112,11 @@ class PageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $page)
-    {
+    {        
+        $settings = Settings::first();
+        Meta::addMeta('title', $settings ? $settings->title : '...');
+        Meta::addMeta('description', $settings ? $settings->metadescription : '...');
+        
         $data = $request->all();
 
         $messages = [

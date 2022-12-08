@@ -9,6 +9,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Meta;
+use App\Models\Settings;
 
 class HomeController extends Controller
 {
@@ -19,6 +21,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $settings = Settings::first();
+        Meta::addMeta('title', $settings ? $settings->title : '...');
+        Meta::addMeta('description', $settings ? $settings->metadescription : '...');
+
         $categories = Category::get()->count();
         $posts = Post::where('type', 1)->get()->count();
         $pages = Post::where('type', 0)->get()->count();

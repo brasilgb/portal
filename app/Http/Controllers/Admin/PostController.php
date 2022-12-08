@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Meta;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Settings;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -20,7 +21,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {        
+        $settings = Settings::first();
+        Meta::addMeta('title', $settings ? $settings->title : '...');
+        Meta::addMeta('description', $settings ? $settings->metadescription : '...');
+        
         $search = $request->get('q');
 
         $query = Post::with('categories')->where('type', 1)->orderBy('id', 'desc');

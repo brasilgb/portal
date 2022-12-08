@@ -159,7 +159,7 @@ const SideBar = () => {
                             type="button"
                             href={route('sections.index')}
                             className={`w-full flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700
-                            ${route().current('layout*')
+                            ${route().current('sections*')
                                     ? "text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
                                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"}
                             `}>
