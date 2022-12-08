@@ -31,7 +31,7 @@ const Pages = ({ pages }) => {
                         <ButtonNew url="pages.create" icon={<IoAdd />} value="Adicionar" />
                         <FormSearch url="pages.index" placeholder="Buscar por página" />
                     </BoxHeader>
-                    <BoxContent>
+                    <BoxContent className="overflow-auto">
                         {flash.message && (
                             <FlashMessage message={flash.message} />
                         )}

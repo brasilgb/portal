@@ -7,9 +7,11 @@ import { useForm, usePage } from '@inertiajs/inertia-react';
 import FlashMessage from '@/Components/Admin/FlashMessage';
 import { Inertia } from '@inertiajs/inertia';
 import Select from 'react-select';
+import { AiFillLayout } from 'react-icons/ai';
 
 const Section = ({ categories, section }) => {
     const { flash } = usePage().props;
+
     const options = categories.map((cat) => ({ value: cat.id, label: cat.name }));
 
     const { data, setData, processing } = useForm({
@@ -22,56 +24,46 @@ const Section = ({ categories, section }) => {
 
     function submit(e) {
         e.preventDefault();
-        console.log(data);
-        // Inertia.post(route('sections.update', section?.id), {
-        //     _method: 'put',
-        //     section1: data.section1,
-        //     section2: data.section2,
-        //     section3: data.section3,
-        //     section4: data.section4,
-        //     section5: data.section5
-        // });
+        Inertia.post(route('sections.update', section?.id), {
+            _method: 'put',
+            section1: data.section1['value'],
+            section2: data.section2['value'],
+            section3: data.section3['value'],
+            section4: data.section4['value'],
+            section5: data.section5['value']
+        });
     }
 
-    const handleChange = (selected) => {
-        console.log(selected);
-        // setData('section1', selected.map((v) => (v.value)));
-        // setData('section2', selected.map((v) => (v.value)));
-        // setData('section3', selected.map((v) => (v.value)));
-        // setData('section4', selected.map((v) => (v.value)));
-        // setData('section5', selected.map((v) => (v.value)));
-    };
-
     return (
-        <AdminLayout title="Configurações">
+        <AdminLayout title="Secções">
             <BoxMain>
                 <BoxSup
                     titleTop={[{
-                        'title': "Configurações",
-                        'icon': <IoCog />
+                        'title': "Secções",
+                        'icon': <AiFillLayout />
                     }]}
                     breadcumb={[
-                        { 'value': 'Configurações', 'url': '', 'separator': '' }
+                        { 'value': 'Secções', 'url': '', 'separator': '' }
                     ]}
                 />
                 <BoxContainer>
-                    <BoxHeader>
-
-                    </BoxHeader>
-
+ 
                     <BoxContent>
+                        
                         {flash.message && (
                             <FlashMessage message={flash.message} />
                         )}
+                        
                         <form onSubmit={submit}>
+                            <div>
                             <div className="grid grid-cols-1 gap-6 mt-4">
 
                                 <div>
                                     <label className="text-gray-700" htmlFor="description">Secção 1</label>
                                     <Select
                                         options={options}
-                                        defaultValue={data.section1}
-                                        onChange={(e) => setData('section1', e.target.value)}
+                                        defaultValue={options.filter((o) => o.value === data.section1)}
+                                        onChange={(selected) => setData('section1', selected)}
                                         placeholder="Selecione a(s) categoria(s)"
                                         styles={{
                                             multiValueLabel: (base) => ({
@@ -84,11 +76,11 @@ const Section = ({ categories, section }) => {
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="description">Secção 1</label>
+                                    <label className="text-gray-700" htmlFor="description">Secção 2</label>
                                     <Select
                                         options={options}
-                                        defaultValue={data.section2}
-                                        onChange={handleChange}
+                                        defaultValue={options.filter((o) => o.value === data.section2)}
+                                        onChange={(selected) => setData('section2', selected)}
                                         placeholder="Selecione a(s) categoria(s)"
                                         styles={{
                                             multiValueLabel: (base) => ({
@@ -101,11 +93,11 @@ const Section = ({ categories, section }) => {
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="description">Secção 1</label>
+                                    <label className="text-gray-700" htmlFor="description">Secção 3</label>
                                     <Select
                                         options={options}
-                                        defaultValue={data.section3}
-                                        onChange={handleChange}
+                                        defaultValue={options.filter((o) => o.value === data.section3)}
+                                        onChange={(selected) => setData('section3', selected)}
                                         placeholder="Selecione a(s) categoria(s)"
                                         styles={{
                                             multiValueLabel: (base) => ({
@@ -118,11 +110,11 @@ const Section = ({ categories, section }) => {
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="description">Secção 1</label>
+                                    <label className="text-gray-700" htmlFor="description">Secção 4</label>
                                     <Select
                                         options={options}
-                                        defaultValue={data.section4}
-                                        onChange={handleChange}
+                                        defaultValue={options.filter((o) => o.value === data.section4)}
+                                        onChange={(selected) => setData('section4', selected)}
                                         placeholder="Selecione a(s) categoria(s)"
                                         styles={{
                                             multiValueLabel: (base) => ({
@@ -135,11 +127,11 @@ const Section = ({ categories, section }) => {
                                 </div>
 
                                 <div>
-                                    <label className="text-gray-700" htmlFor="description">Secção 1</label>
-                                    <Select
+                                    <label className="text-gray-700" htmlFor="description">Secção 5</label>
+                                    <Select  className="mb-10"
                                         options={options}
-                                        defaultValue={data.section5}
-                                        onChange={handleChange}
+                                        defaultValue={options.filter((o) => o.value === data.section5)}
+                                        onChange={(selected) => setData('section5', selected)}
                                         placeholder="Selecione a(s) categoria(s)"
                                         styles={{
                                             multiValueLabel: (base) => ({
@@ -156,6 +148,7 @@ const Section = ({ categories, section }) => {
                             </div>
                             <div className="flex justify-end mt-6">
                                 <ButtonSave processing={processing} />
+                            </div>
                             </div>
                         </form>
 

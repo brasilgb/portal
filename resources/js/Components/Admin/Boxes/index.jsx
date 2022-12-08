@@ -87,10 +87,10 @@ export const BoxHeader = ({ children }) => {
     )
 }
 
-export const BoxContent = ({ children }) => {
+export const BoxContent = ({ children, className }) => {
     return (
         <Fragment>
-            <div className="p-4 overflow-auto">
+            <div className={`p-4 ${className}`}>
                 {children}
             </div>
         </Fragment>

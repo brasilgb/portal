@@ -33,7 +33,7 @@ const Users = ({ users }) => {
                             <FormSearch url="users.index" placeholder="Buscar por usuário" />
                         </BoxHeader>
                     }
-                    <BoxContent>
+                    <BoxContent className="overflow-auto">
                         {flash.message && (
                             <FlashMessage message={flash.message} />
                         )}

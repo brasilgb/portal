@@ -13,7 +13,7 @@ const SideBar = () => {
     return (
 
         <Fragment>
-            <div className="absolute md:hidden z-0 pt-2 px-2">
+            <div className="absolute md:hidden z-50 pt-2 px-2">
                 <label htmlFor="menu-toggle" className="cursor-pointer block dark:text-gray-200">
                     <button
                         onClick={() => setShowSide(!showSide)}
@@ -29,7 +29,7 @@ const SideBar = () => {
                 </label>
             </div>
 
-            <div className={`ease-in-out duration-300 ${showSide ? 'translate-x-0' : '-translate-x-64 md:translate-x-0'} fixed md:flex flex-col w-64 h-screen py-2 bg-white border-r dark:bg-gray-900 dark:border-gray-700 shadow`}>
+            <div className={`z-40 ease-in-out duration-300 ${showSide ? 'translate-x-0' : '-translate-x-64 md:translate-x-0'} fixed md:flex flex-col w-64 h-screen py-2 bg-white border-r dark:bg-gray-900 dark:border-gray-700 shadow`}>
                 {/* <h2 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mt-6 md:mt-0">Brand</h2> */}
 
                 <div className="flex flex-col items-center mt-2 -mx-2">

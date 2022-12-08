@@ -31,7 +31,7 @@ const Categories = ({ categories }) => {
                         <ButtonNew url="categories.create" icon={<IoAdd />} value="Adicionar" />
                         <FormSearch url="categories.index" placeholder="Buscar por categoria" />
                     </BoxHeader>
-                    <BoxContent>
+                    <BoxContent className="overflow-auto">
                         {flash.message && (
                             <FlashMessage message={flash.message} />
                         )}

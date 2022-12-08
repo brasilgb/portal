@@ -151,7 +151,7 @@ class PostController extends Controller
         if ($request->hasfile('featured')) {
             $fileName = time() . '.' . $request->featured->extension();
             $request->featured->move(public_path('uploads'), $fileName);
-            if (public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured) {
+            if (file_exists(public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured)) {
                 unlink(public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured);
             }
         }
@@ -177,7 +177,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if (public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured) {
+        if (file_exists(public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured)) {
             unlink(public_path('uploads') . DIRECTORY_SEPARATOR . $post->featured);
         }
         $post->categories()->detach();

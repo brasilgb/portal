@@ -47,7 +47,7 @@ const AdUser = () => {
                         {flash.message && (
                             <FlashMessage message={flash.message} />
                         )}
-                        <form onSubmit={submit}>
+                        <form onSubmit={submit} autoComplete="off">
                             <div className="grid grid-cols-1 gap-6 mt-4">
                             <div>
                                     <label className="text-gray-700" htmlFor="avatar">Imagem avatar</label>

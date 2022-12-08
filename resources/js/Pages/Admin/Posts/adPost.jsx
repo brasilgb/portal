@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react';
 import { BoxContainer, BoxContent, BoxFooter, BoxHeader, BoxMain, BoxSup } from '@/Components/Admin/Boxes';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { IoDocumentTextOutline, IoArrowBackOutline } from 'react-icons/io5';
 import { ButtonNew, ButtonSave } from '@/Components/Admin/Buttons';
 import { FormSearch } from '@/Components/Admin/Form';
 import { useForm } from '@inertiajs/inertia-react';
-
 import Select from 'react-select';
+import { Editor } from '@tinymce/tinymce-react';
 
 const AdPost = ({ categories }) => {
-
+    const editorRef = useRef();
     const options = categories.map((cat) => ({ value: cat.id, label: cat.name }))
 
     const { data, setData, post, progress, processing, errors } = useForm({
@@ -26,6 +26,7 @@ const AdPost = ({ categories }) => {
 
     function submit(e) {
         e.preventDefault();
+        setData('content', editorRef.current.getContent());
         post(route('posts.store'));
     }
 
@@ -52,7 +53,7 @@ const AdPost = ({ categories }) => {
                         <FormSearch url="posts.index" placeholder="Buscar por postagem" />
                     </BoxHeader>
                     <BoxContent>
-                        <form onSubmit={submit}>
+                        <form onSubmit={submit} autoComplete="off">
                             <div className="grid grid-cols-1 gap-6 mt-4">
                                 <div>
                                     <label className="text-gray-700" htmlFor="title">Título</label>
@@ -79,12 +80,33 @@ const AdPost = ({ categories }) => {
 
                                 <div>
                                     <label className="text-gray-700" htmlFor="content">Conteúdo</label>
-                                    <textarea
+                                    {/* <textarea
                                         id="content"
                                         value={data.content}
                                         onChange={(e) => setData('content', e.target.value)}
                                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                                    </textarea>
+                                    </textarea> */}
+                                    <Editor
+                                        apiKey="3v1hskg4ud3hwf1bi5to0pt3xp6zjyksrvujfngcpzzaw2l3"
+                                        onInit={(evt, editor) => editorRef.current = editor}
+                                        initialValue=""
+                                        id="content"
+                                        init={{
+                                            language: 'pt_BR',
+                                            height: 300,
+                                            menubar: false,
+                                            plugins: [
+                                                'advlist autolink lists link image charmap print preview anchor',
+                                                'searchreplace visualblocks code fullscreen',
+                                                'insertdatetime media table paste code help wordcount'
+                                            ],
+                                            toolbar: 'undo redo | styles  | ' +
+                                                'bold italic forecolor backcolor | alignleft aligncenter ' +
+                                                'alignright alignjustify | bullist numlist outdent indent | ' +
+                                                'removeformat | help',
+                                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                                        }}
+                                    />
                                     {errors.content && <div className="text-red-500">{errors.content}</div>}
                                 </div>
 
@@ -113,11 +135,11 @@ const AdPost = ({ categories }) => {
                                         placeholder="Selecione a(s) categoria(s)"
                                         styles={{
                                             multiValueLabel: (base) => ({
-                                              ...base,
-                                              backgroundColor: '#00AEEF',
-                                              color: 'white'
+                                                ...base,
+                                                backgroundColor: '#00AEEF',
+                                                color: 'white'
                                             }),
-                                          }}
+                                        }}
                                     />
                                     {errors.category_id && <div className="text-red-500">{errors.category_id}</div>}
                                 </div>
@@ -145,7 +167,7 @@ const AdPost = ({ categories }) => {
                                 </div>
                             </div>
                             <div className="flex justify-end mt-6">
-                                <ButtonSave  processing={processing} />
+                                <ButtonSave processing={processing} />
                             </div>
                         </form>
 

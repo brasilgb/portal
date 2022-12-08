@@ -130,7 +130,7 @@ class PageController extends Controller
         if ($request->hasfile('featured')) {
             $fileName = time().'.'.$request->featured->extension();  
             $request->featured->move(public_path('uploads'), $fileName);
-            if( public_path('uploads').DIRECTORY_SEPARATOR.$page->featured){
+            if( file_exists(public_path('uploads').DIRECTORY_SEPARATOR.$page->featured)){
                 unlink(public_path('uploads').DIRECTORY_SEPARATOR.$page->featured);
             }
         }
@@ -151,7 +151,7 @@ class PageController extends Controller
      */
     public function destroy(Post $page)
     {
-        if( public_path('uploads').DIRECTORY_SEPARATOR.$page->featured){
+        if( file_exists(public_path('uploads').DIRECTORY_SEPARATOR.$page->featured)){
             unlink(public_path('uploads').DIRECTORY_SEPARATOR.$page->featured);
         }
         $page->delete($page);
