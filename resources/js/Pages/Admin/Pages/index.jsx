@@ -41,7 +41,6 @@ const Pages = ({ pages }) => {
                                     <ATh>#</ATh>
                                     <ATh>Title</ATh>
                                     <ATh>Slug</ATh>
-                                    <ATh>Resumo</ATh>
                                     <ATh>Ativa</ATh>
                                     <ATh></ATh>
                                 </ATr>
@@ -51,9 +50,6 @@ const Pages = ({ pages }) => {
                                             <ATd>{page.id}</ATd>
                                             <ATd>{page.title}</ATd>
                                             <ATd>{page.slug}</ATd>
-                                            <ATd>
-                                                {page.summary}
-                                            </ATd>
                                             <ATd>
                                                 <IconContext.Provider value={{ className: `text-2xl ${page.active ? 'text-green-600' : 'text-red-500'}` }}>
                                                     {page.active

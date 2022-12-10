@@ -41,7 +41,6 @@ const Posts = ({ posts }) => {
                                     <ATh>#</ATh>
                                     <ATh>Title</ATh>
                                     <ATh>Slug</ATh>
-                                    <ATh>Resumo</ATh>
                                     <ATh>Categorias</ATh>
                                     <ATh>Ativo</ATh>
                                     <ATh></ATh>
@@ -52,9 +51,6 @@ const Posts = ({ posts }) => {
                                             <ATd>{post.id}</ATd>
                                             <ATd>{post.title}</ATd>
                                             <ATd>{post.slug}</ATd>
-                                            <ATd>
-                                                {post.summary}
-                                            </ATd>
                                             <ATd>
                                                 <div className="grid grid-cols-2 gap-1">
                                                 {post.categories.map((c, i) => (

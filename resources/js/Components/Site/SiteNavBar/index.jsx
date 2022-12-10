@@ -37,7 +37,7 @@ const SiteNavbar = () => {
                         href="/"
                         className="flex items-center"
                     >
-                        <img src={`/uploads/${settings?.logo ? settings?.logo : 'default.png'}`} className="h-6 mr-3 sm:h-9 rounded-full" alt={settings?.title ? settings?.title : ''} />
+                        <img src={`/uploads/${settings?.logo ? settings?.logo : 'default.png'}`} className="h-12 mr-3 rounded-full" alt={settings?.title ? settings?.title : ''} />
                         {/* <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
                     </Link>
                     <div className="flex md:order-2">
@@ -56,7 +56,7 @@ const SiteNavbar = () => {
                         <Link
                             as="button"
                             type="button"
-                            className="inline-flex items-center p-2"
+                            className="md:hidden inline-flex items-center p-2"
                         >
                             <span className="sr-only">Open main menu</span>
                             <IconContext.Provider value={{ className: 'text-2xl' }} >
@@ -68,7 +68,7 @@ const SiteNavbar = () => {
                         <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
 
                             {categories
-                                .filter((p) => (p.parent === null))
+                                .filter((p) => (p.parent === null && p.active === 1))
                                 .map((category, i) => (
 
                                     <li key={i} className="relative z-10 block focus:outline-none">
