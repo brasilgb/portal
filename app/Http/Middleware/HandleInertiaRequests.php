@@ -54,14 +54,14 @@ class HandleInertiaRequests extends Middleware
                 ? Settings::orderByDesc('id')->first(['id', 'title', 'description', 'logo'])
                 : '',
 
-            'categories' => fn () => Category::get()
+            'categoriesMenu' => fn () => Category::get()
                 ? Category::with('subCategories')->get()
                 : '',
 
-                'pages' => fn () => Post::get()
+            'pages' => fn () => Post::get()
                 ? Post::where('type', 0)->orderByDesc('title')->get()
                 : '',
-                'userRegistered' => User::get()->count()
+            'userRegistered' => User::get()->count()
 
         ]);
     }

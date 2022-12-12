@@ -15,7 +15,7 @@ const SiteLayout = ({ children }) => {
             <main className="font-Roboto min-h-screen flex bg-gray-50">
                 <div className='flex flex-col w-full'>
                     <SiteNavbar />
-                    <div className="flex-grow">
+                    <div className="flex-grow ">
                         {children}
                     </div>
                     <SiteFooter />

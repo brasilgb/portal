@@ -6,10 +6,7 @@ import React, { Fragment } from 'react'
 
 const Home = ({ sections, categories }) => {
 
-  const limitText = ((texto, max) => {
-    let el = texto.length > max ? '...' : '';
-    return texto.substr(0, max) + el;
-  })
+
   return (
     <SiteLayout>
       <Head title="Home" />
@@ -28,38 +25,10 @@ const Home = ({ sections, categories }) => {
           />
         ))}
 
-      <Section bgSection="bg-white px-8 md:px-0">
-        {categories
-          .filter((s2) => (s2.id === sections.section2))
-          .map((category, icategory) => (
-            <div key={icategory} className="md:w-5/6 mx-auto pt-10">
-
-              <div className="border-b border-gray-200 pb-3">
-                <h1 className="text-2xl font-bold text-gray-700">
-                  {category.name}
-                </h1>
-              </div>
-              <div className="grid md:grid-cols-3 gap-10 py-4">
-                {category.posts.map((post, ipost) => (
-                  <div key={ipost} className="border border-gray-100 rounded-md hover:shadow-lg">
-
-                    <img
-                      className="rounded-t-md"
-                      src={`/uploads/${post.featured}`}
-                      alt=""
-                    />
-                    <div className="w-full pt-6 px-5 pb-5">
-                      <h4 className="text-gray-600 text-lg font-bold mb-6">
-                        {post.title}
-                      </h4>
-                      <p className='textlimit text-gray-600'>{limitText(post.summary, 150)}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-      </Section>
+      <Section titleShow={false} classSection="bg-white py-4" section={sections.section2} categories={categories} classPosts="border-0 text-center h-full" />
+      <Section titleShow={true} classSection="bg-gray-100 py-4" section={sections.section3} categories={categories} classPosts="border border-gray-200 rounded-md hover:shadow-lg bg-gray-50 h-full" />
+      <Section titleShow={true} classSection="bg-white py-4" section={sections.section4} categories={categories} classPosts="border border-gray-100 rounded-md hover:shadow-lg h-full" />
+      <Section titleShow={true} classSection="bg-white py-4" section={sections.section5} categories={categories} classPosts="border border-gray-100 rounded-md hover:shadow-lg h-full" />
 
     </SiteLayout>
   )

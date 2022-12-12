@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UserController;
 
 // Rotas Site
 use App\Http\Controllers\Site\HomeController as SiteHome;
+use App\Http\Controllers\Site\PostController as SitePost;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,8 +26,7 @@ use App\Http\Controllers\Site\HomeController as SiteHome;
 |
 */
 
-Route::get('/', [SiteHome::class, 'index'])->name('home');
-
+// Admin routes
 Route::get('/admin', [AdminHome::class, 'index'])->name('admin');
 Route::resource('/admin/categories', CategoryController::class);
 Route::resource('/admin/posts', PostController::class);
@@ -35,4 +35,8 @@ Route::resource('/admin/settings', SettingsController::class);
 Route::resource('/admin/users', UserController::class);
 Route::resource('/admin/sections', SectionController::class);
 
+// Site routes
+
+Route::get('/', [SiteHome::class, 'index'])->name('home');
+Route::get('/{category}/{post}', [SitePost::class, 'index'])->name('category.post');
 require __DIR__.'/auth.php';

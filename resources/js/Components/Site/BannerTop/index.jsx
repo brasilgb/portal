@@ -15,7 +15,7 @@ const BannerTop = ({ dataConfig }) => {
         <div className="mx-auto">
           <div className={`flex items-center flex-col justify-center h-[20rem] md:h-[25rem] ${dataConfig.background} text-center`}>
             <h1 className="font-bold text-2xl md:text-6xl text-white">{dataConfig.title}</h1>
-            <p className="font-medium md:text-xl text-white pt-10 text-center px-5 md:px-20">
+            <p className="font-medium md:text-xl text-white text-center px-5 md:px-20">
               {dataConfig.summary}</p>
           </div>
         </div>

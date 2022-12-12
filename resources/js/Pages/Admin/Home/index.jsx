@@ -51,6 +51,7 @@ const HomeAdmin = ({ categories, posts, pages, users }) => {
             </div>
 
           </div>
+          
         </Fragment>
       </BoxMain>
     </AdminLayout>
