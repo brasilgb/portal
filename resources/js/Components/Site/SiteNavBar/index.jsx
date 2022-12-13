@@ -2,17 +2,18 @@ import { Link, usePage } from '@inertiajs/inertia-react';
 import React, { Fragment, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { IoCaretDown, IoCaretUp, IoMenu } from 'react-icons/io5';
+import LinkNav from '../LinkNav';
 
 const SiteNavbar = () => {
 
-    const { auth, settings, categoriesMenu, pages } = usePage().props;
+    const { auth, settings, categoriesMenu, pagesMenu } = usePage().props;
 
     const [openMenu, setOpenMenu] = useState(false);
     const [menuCategoryOpen, setMenuCategoryOpen] = useState([false, false]);
 
     const openLink = (e, slug) => {
         e.preventDefault();
-        Inertia.get(route('categoria', slug));
+        href = { slug };
     };
 
     const toggleSubMenu = (e, i) => {
@@ -81,12 +82,11 @@ const SiteNavbar = () => {
 
                                     <li key={i} className="relative z-10 block focus:outline-none border-b border-gray-200 md:border-none">
 
-                                        <button
-                                            onClick={(e) => (category.sub_categories.length === 0
-                                                ? openLink(e, category.slug)
-                                                : toggleSubMenu(e, i))}
+                                        <LinkNav
+                                            category={category}
+                                            onClick={(e) => toggleSubMenu(e, i)}
+                                            slug={route('category', category.slug)}
                                             className="block py-2 pl-4 pr-4 w-full text-gray-700 bg-gray-50 md:rounded md:bg-transparent md:text-gray-600 md:p-0"
-                                            aria-current="page"
                                         >
                                             <div className="flex items-center justify-between">
                                                 <span>{category.name}</span>
@@ -99,15 +99,15 @@ const SiteNavbar = () => {
                                                 }
 
                                             </div>
+                                        </LinkNav>
 
-                                        </button>
                                         <ul className={`${menuCategoryOpen[i] ? 'block' : 'hidden'} md:absolute md:top-6 -md:left-16 md:mt-2 py-2 md:w-48 bg-gray-50 md:rounded-b md:shadow-lg z-20 border border-gray-100`}>
                                             {categoriesMenu
                                                 .filter((c) => (c.parent === category.id))
                                                 .map((category2, inndexC2) => (
                                                     <li key={inndexC2}>
                                                         <button
-                                                            href=''
+                                                            href={route('category', category.slug)}
                                                             className="block px-4 py-2 text-sm capitalize text-gray-700 font-normal"
                                                         >
                                                             {category2.name}
@@ -117,17 +117,16 @@ const SiteNavbar = () => {
                                         </ul>
                                     </li>
                                 ))}
-                            {pages.length > 0 &&
-                                pages
+                            {pagesMenu.length > 0 &&
+                                pagesMenu
                                     .filter((p) => (p.active === 1))
                                     .map((page, indexP) => (
 
                                         <li key={indexP}>
 
                                             <Link
-                                                href="#"
+                                                href={route('page', page.slug)}
                                                 className="block py-2 pl-3 pr-4 w-full text-gray-700 bg-gray-50 md:rounded md:bg-transparent md:text-gray-600 md:p-0"
-                                                aria-current="page"
                                             >
                                                 {page.title}
                                             </Link>

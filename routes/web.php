@@ -4,8 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 // Rotas Admin
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController as AdminHome;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PostController;
@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\UserController;
 // Rotas Site
 use App\Http\Controllers\Site\HomeController as SiteHome;
 use App\Http\Controllers\Site\PostController as SitePost;
+use App\Http\Controllers\Site\PageController as SitePage;
+use App\Http\Controllers\Site\CategoryController as SiteCategory;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,18 +27,22 @@ use App\Http\Controllers\Site\PostController as SitePost;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Site routes
+Route::get('/', [SiteHome::class, 'index'])->name('home');
+Route::get('/ct/{category}', [SiteCategory::class, 'index'])->name('category');
+Route::get('/ps/{category}/{post}', [SitePost::class, 'index'])->name('post');
+Route::get('/pg/{page}', [SitePage::class, 'index'])->name('page');
 
 // Admin routes
-Route::get('/admin', [AdminHome::class, 'index'])->name('admin');
-Route::resource('/admin/categories', CategoryController::class);
-Route::resource('/admin/posts', PostController::class);
-Route::resource('/admin/pages', PageController::class);
-Route::resource('/admin/settings', SettingsController::class);
-Route::resource('/admin/users', UserController::class);
-Route::resource('/admin/sections', SectionController::class);
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', [AdminHome::class, 'index'])->name('admin');
+    Route::resource('/categories', CategoryController::class);
+    Route::resource('/posts', PostController::class);
+    Route::resource('/pages', PageController::class);
+    Route::resource('/settings', SettingsController::class);
+    Route::resource('/users', UserController::class);
+    Route::resource('/sections', SectionController::class);
+});
 
-// Site routes
 
-Route::get('/', [SiteHome::class, 'index'])->name('home');
-Route::get('/{category}/{post}', [SitePost::class, 'index'])->name('category.post');
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -1,12 +1,39 @@
 import { usePage } from '@inertiajs/inertia-react';
-import React from 'react'
+import React, { Fragment } from 'react'
 
 const SiteFooter = () => {
-    const { settings } = usePage().props;
+  const { settings } = usePage().props;
+
+  const addressSplit = ((val) => {
+    let x;
+    return val.split('|').map((a, i) => {
+      for (x = i + 1; x < a.length; x++) {
+        return <h1 key={i} className={`text-sm text-gray-50`}>{a}</h1>
+      }
+    })
+  })
+
   return (
-    <footer className="md:flex flex-col items-center justify-center px-2 py-20 border-t border-gray-100 bg-gradient-to-b from-gray-50 via-gray-100 to-gray-50  shadow-lg">
-    <p className="text-xs text-gray-800  dark:text-gray-200 text-center">&copy;{ new Date().getFullYear() } { settings?.title }. Todos os direitos reservados</p>
-</footer>
+    <Fragment>
+      <section className="py-10 bg-solar-blue-200">
+        <div className="flex items-center justify-between md:w-4/6 mx-auto">
+
+
+          <div>
+            <img className="h-28" src="/uploads/grupo-solar.jpg" alt="" />
+          </div>
+          <div>
+            <h1 className="text-xl text-gray-50 border-b mb-2">Endereço</h1>
+            {addressSplit(settings?.address)}
+          </div>
+
+
+        </div>
+      </section>
+      <footer className="md:flex flex-col items-center justify-center py-2 border-t border-white shadow-lg">
+        <p className="text-xs text-gray-800  dark:text-gray-200 text-center">&copy;{new Date().getFullYear()} {settings?.description}. Todos os direitos reservados</p>
+      </footer>
+    </Fragment>
   )
 }
 

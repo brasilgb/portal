@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/inertia-react';
 import React, { Fragment } from 'react'
 
-const Section = ({ section, categories, classSection, classPosts, titleShow }) => {
+const SectionCategory = ({ category, classSection, classPosts, titleShow }) => {
 
     const limitText = ((texto, max) => {
         let el = texto.length > max ? '...' : '';
@@ -11,9 +11,7 @@ const Section = ({ section, categories, classSection, classPosts, titleShow }) =
     return (
         <Fragment>
             <section className={`${classSection} px-8 md:px-0`}>
-                {categories.filter((s2) => (s2.id === section))
-                    .map((category, icategory) => (
-                        <div key={icategory} className="md:w-4/6 mx-auto pt-10">
+                        <div className="md:w-4/6 mx-auto pt-10">
 
                             {titleShow &&
                                 <div className="border-b border-gray-200 pb-3">
@@ -23,16 +21,16 @@ const Section = ({ section, categories, classSection, classPosts, titleShow }) =
                                 </div>
                             }
 
-                            <div className="grid md:grid-cols-3 gap-10 py-4 h-full">
+                            <div className="grid md:grid-cols-3 gap-10 h-full">
                                 {category.posts.map((post, ipost) => (
                                     <Link
-                                        href={`/${category.slug}/${post.slug}`}
+                                        href={route('post', [category.slug, post.slug])}
                                         className=""
                                     >
                                         <div key={ipost} className={`${classPosts}`}>
 
                                             <img
-                                                className="rounded-t-md mx-auto max-h-[10rem]"
+                                                className="rounded-t-md mx-auto"
                                                 src={`/uploads/${post.featured}`}
                                                 alt=""
                                             />
@@ -49,10 +47,9 @@ const Section = ({ section, categories, classSection, classPosts, titleShow }) =
                             </div>
 
                         </div>
-                    ))}
             </section>
         </Fragment>
     )
 }
 
-export default Section;
+export default SectionCategory;

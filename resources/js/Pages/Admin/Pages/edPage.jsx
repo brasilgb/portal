@@ -101,15 +101,8 @@ const EdPage = ({ page }) => {
                                             language: 'pt_BR',
                                             height: 300,
                                             menubar: false,
-                                            plugins: [
-                                                'advlist autolink lists link image charmap print preview anchor',
-                                                'searchreplace visualblocks code fullscreen',
-                                                'insertdatetime media table paste code help wordcount'
-                                            ],
-                                            toolbar: 'undo redo | styles  | ' +
-                                                'bold italic forecolor backcolor | alignleft aligncenter ' +
-                                                'alignright alignjustify | bullist numlist outdent indent | ' +
-                                                'removeformat | help',
+                                            plugins: 'autolink lists link charmap print preview anchor table image',
+                                            toolbar: 'undo redo styles link bold italic image table lineheight alignleft aligncenter alignright alignjustify  bullist numlist outdent indent',
                                             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                                         }}
                                     />

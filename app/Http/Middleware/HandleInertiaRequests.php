@@ -51,15 +51,15 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'settings' => fn () => Settings::first()
-                ? Settings::orderByDesc('id')->first(['id', 'title', 'description', 'logo'])
+                ? Settings::orderByDesc('id')->first()
                 : '',
 
             'categoriesMenu' => fn () => Category::get()
-                ? Category::with('subCategories')->get()
+                ? Category::with('subCategories')->where('active', 1)->get()
                 : '',
 
-            'pages' => fn () => Post::get()
-                ? Post::where('type', 0)->orderByDesc('title')->get()
+            'pagesMenu' => fn () => Post::get()
+                ? Post::where('type', 0)->where('active', 1)->orderByDesc('title')->get()
                 : '',
             'userRegistered' => User::get()->count()
 

@@ -1,5 +1,5 @@
 import BannerTop from '@/Components/Site/BannerTop';
-import Section from '@/Components/Site/Section';
+import SectionHome from '@/Components/Site/SectionHome';
 import SiteLayout from '@/Layouts/SiteLayout';
 import { Head } from '@inertiajs/inertia-react';
 import React, { Fragment } from 'react'
@@ -25,10 +25,10 @@ const Home = ({ sections, categories }) => {
           />
         ))}
 
-      <Section titleShow={false} classSection="bg-white py-4" section={sections.section2} categories={categories} classPosts="border-0 text-center h-full" />
-      <Section titleShow={true} classSection="bg-gray-100 py-4" section={sections.section3} categories={categories} classPosts="border border-gray-200 rounded-md hover:shadow-lg bg-gray-50 h-full" />
-      <Section titleShow={true} classSection="bg-white py-4" section={sections.section4} categories={categories} classPosts="border border-gray-100 rounded-md hover:shadow-lg h-full" />
-      <Section titleShow={true} classSection="bg-white py-4" section={sections.section5} categories={categories} classPosts="border border-gray-100 rounded-md hover:shadow-lg h-full" />
+      <SectionHome titleShow={false} classSection="bg-white py-4" section={sections.section2} categories={categories} classPosts="border-0 text-center h-full" />
+      <SectionHome titleShow={true} classSection="bg-gray-100 py-4 pt-10" section={sections.section3} categories={categories} classPosts="border border-gray-200 rounded-md hover:shadow-lg bg-gray-50 h-full" />
+      <SectionHome titleShow={true} classSection="bg-white py-4 pt-10" section={sections.section4} categories={categories} classPosts="border border-gray-100 rounded-md hover:shadow-lg h-full" />
+      <SectionHome titleShow={false} classSection="bg-gray-100 py-4" section={sections.section5} categories={categories} classPosts="border border-gray-200 rounded-md hover:shadow-lg h-full bg-white" />
 
     </SiteLayout>
   )
