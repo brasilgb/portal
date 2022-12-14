@@ -8,22 +8,22 @@ const SiteFooter = () => {
     let x;
     return val.split('|').map((a, i) => {
       for (x = i + 1; x < a.length; x++) {
-        return <h1 key={i} className={`text-sm text-gray-50`}>{a}</h1>
+        return <h1 key={i} className={`text-xs md:text-sm text-gray-50`}>{a}</h1>
       }
     })
   })
 
   return (
     <Fragment>
-      <section className="py-10 bg-solar-blue-200">
+      <section className="py-10 px-8 md:px-0 bg-solar-blue-200">
         <div className="flex items-center justify-between md:w-4/6 mx-auto">
 
 
-          <div>
-            <img className="h-28" src="/uploads/grupo-solar.jpg" alt="" />
+          <div className="">
+            <img className="h-12 md:h-24" src="/uploads/grupo-solar.jpg" alt="" />
           </div>
           <div>
-            <h1 className="text-xl text-gray-50 border-b mb-2">Endereço</h1>
+            <h1 className="text-sm md:text-xl text-gray-50 border-b mb-2">Endereço</h1>
             {addressSplit(settings?.address)}
           </div>
 

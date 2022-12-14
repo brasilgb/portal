@@ -15,7 +15,7 @@ const Pages = ({ pages }) => {
             image: pages?.featured,
             title: pages?.title,
             summary: '',
-            background: 'bg-gradient-to-b from-blue-900 to-transparent !h-[8rem] md:!h-[15rem] uppercase'
+            background: 'bg-gradient-to-b from-blue-900 to-transparent !min-h-[200px] md:min-h-[400px] uppercase'
           }}
         />
 

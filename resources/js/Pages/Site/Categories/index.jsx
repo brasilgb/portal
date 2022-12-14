@@ -18,7 +18,7 @@ const Categories = ({ category }) => {
             image: category.posts.length > 0 ? category.posts[0].featured : '',
             title: category.name,
             summary: '',
-            background: 'bg-gradient-to-b from-blue-900 to-transparent !h-[8rem] md:!h-[15rem]'
+            background: 'bg-gradient-to-b from-blue-900 to-transparent !min-h-[200px] md:min-h-[400px] uppercase'
           }}
         />
 
