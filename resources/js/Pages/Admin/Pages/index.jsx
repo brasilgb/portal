@@ -38,9 +38,9 @@ const Pages = ({ pages }) => {
                         <div className="inline-block min-w-full rounded-md overflow-hidden">
                             <ATable>
                                 <ATr header={true}>
-                                    <ATh>#</ATh>
+                                    <ATh>#      </ATh>
                                     <ATh>Title</ATh>
-                                    <ATh>Slug</ATh>
+                                    <ATh>Slug   </ATh>
                                     <ATh>Ativa</ATh>
                                     <ATh></ATh>
                                 </ATr>
